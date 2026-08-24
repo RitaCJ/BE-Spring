@@ -1,0 +1,87 @@
+package com.example.bespring.domain;
+
+import com.example.bespring.domain.enums.Genero;
+import com.example.bespring.domain.enums.Perfil;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+
+@Entity
+public class Utilizador {
+
+    //Defini a chave primária
+    @Id
+    //Faz o ID ser auto-incrementavel
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long idUtilizador;
+
+    @NotEmpty
+    @Column(length = 15, nullable = false)
+    private String primeiroNome;
+
+    @NotEmpty
+    @Column(length = 15, nullable = false)
+    private String sobrenome;
+
+    @NotEmpty
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Genero genero;
+
+    @NotEmpty
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Perfil perfil;
+
+    @NotEmpty
+    @ManyToOne //Flag - Muitos utilizadores para uma escola.
+    @JoinColumn(name = "escola_id", nullable = false)
+    private Escola escola;
+
+    public Utilizador() {
+
+    }
+
+    public Utilizador(String primeiroNome, String sobrenome, Genero genero, Perfil perfil) {
+        this.primeiroNome = primeiroNome;
+        this.sobrenome = sobrenome;
+        this.genero = genero;
+        this.perfil = perfil;
+    }
+
+    public Long getIdUtilizador() {
+        return idUtilizador;
+    }
+
+    public String getPrimeiroNome() {
+        return primeiroNome;
+    }
+
+    public void setPrimeiroNome(String primeiroNome) {
+        this.primeiroNome = primeiroNome;
+    }
+
+    public String getSobrenome() {
+        return sobrenome;
+    }
+
+    public void setSobrenome(String sobrenome) {
+        this.sobrenome = sobrenome;
+    }
+
+    public Genero getGenero() {
+        return genero;
+    }
+
+    public void setGenero(Genero genero) {
+        this.genero = genero;
+    }
+
+    public Perfil getPerfil() {
+        return perfil;
+    }
+
+    public void setPerfil(Perfil perfil) {
+        this.perfil = perfil;
+    }
+
+}
