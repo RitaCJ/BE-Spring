@@ -41,6 +41,18 @@ public class Aluno extends Utilizador {
 
     public Aluno(String primeiroNome, String sobrenome, String nomeUtilizador, int numeroAluno, String sala, String corFavorita, Boolean possuiDaltonismo, Genero genero, Escola escola, Perfil perfil) {
 
+        if(primeiroNome == null || primeiroNome.isBlank()){
+            throw new IllegalArgumentException("O primeiro nome não pode ser vázio");
+        }else if(sobrenome == null || sobrenome.isBlank()){
+            throw new IllegalArgumentException("O sobrenome não pode ser vázio");
+        }else if(nomeUtilizador == null || nomeUtilizador.isBlank()){
+            throw new IllegalArgumentException("O nome de utilizador não pode ser vázio");
+        }else if(sala == null || sala.isBlank()){
+            throw new IllegalArgumentException("O campo sala não pode ser vázio");
+        }else if(corFavorita == null || corFavorita.isBlank()){
+            throw new IllegalArgumentException("O campo cor favorita não pode ser vázio");
+        }
+
         this.setPrimeiroNome(primeiroNome); //Campo herdado
         this.setSobrenome(sobrenome);
         this.nomeUtilizador = nomeUtilizador;

@@ -8,6 +8,7 @@ import com.example.bespring.domain.enums.Perfil;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class AlunoDomainTest {
 
@@ -39,5 +40,111 @@ public class AlunoDomainTest {
         assertEquals(genero, aluno.getGenero());
         assertEquals(escola, aluno.getEscola());
         assertEquals(perfil, aluno.getPerfil());
+    }
+
+    @Test
+    void naoDeveCriarAlunoComPrimeiroNomeVazio() throws Exception {
+
+        String nomeUtilizador = "asaj01";
+        int numeroAluno = 5;
+        String sala = "1A";
+        String corFavorita = "Azul";
+        boolean possuiDaltonismo = true;
+
+        String primeiroNome = "";
+        String sobrenome = "Asa";
+        Genero genero = Genero.FEMININO;
+        Perfil perfil = Perfil.ALUNO;
+
+        Escola escola = new Escola("School", "Rua francisco da silva", "9234234445", "school@gmail.com");
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            new Aluno(primeiroNome, sobrenome, nomeUtilizador, numeroAluno, sala, corFavorita, possuiDaltonismo, genero, escola, perfil);
+        });
+    }
+
+    @Test
+    void naoDeveCriarAlunoComSobrenomeVazio() throws Exception {
+
+        String nomeUtilizador = "asaj01";
+        int numeroAluno = 5;
+        String sala = "1A";
+        String corFavorita = "Azul";
+        boolean possuiDaltonismo = true;
+
+        String primeiroNome = "Bruna";
+        String sobrenome = "";
+        Genero genero = Genero.FEMININO;
+        Perfil perfil = Perfil.ALUNO;
+
+        Escola escola = new Escola("School", "Rua francisco da silva", "9234234445", "school@gmail.com");
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            new Aluno(primeiroNome, sobrenome, nomeUtilizador, numeroAluno, sala, corFavorita, possuiDaltonismo, genero, escola, perfil);
+        });
+    }
+
+    @Test
+    void naoDeveCriarAlunoComNomeUtilizadorVazio() throws Exception {
+
+        String nomeUtilizador = "";
+        int numeroAluno = 5;
+        String sala = "1A";
+        String corFavorita = "Azul";
+        boolean possuiDaltonismo = true;
+
+        String primeiroNome = "Bruna";
+        String sobrenome = "Asa";
+        Genero genero = Genero.FEMININO;
+        Perfil perfil = Perfil.ALUNO;
+
+        Escola escola = new Escola("School", "Rua francisco da silva", "9234234445", "school@gmail.com");
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            new Aluno(primeiroNome, sobrenome, nomeUtilizador, numeroAluno, sala, corFavorita, possuiDaltonismo, genero, escola, perfil);
+        });
+
+    }
+
+    @Test
+    void naoDeveCriarAlunoComCampoSalaVazio() throws Exception {
+
+        String nomeUtilizador = "Bruna01";
+        int numeroAluno = 5;
+        String sala = "";
+        String corFavorita = "Azul";
+        boolean possuiDaltonismo = true;
+
+        String primeiroNome = "Bruna";
+        String sobrenome = "Asa";
+        Genero genero = Genero.FEMININO;
+        Perfil perfil = Perfil.ALUNO;
+
+        Escola escola = new Escola("School", "Rua francisco da silva", "9234234445", "school@gmail.com");
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            new Aluno(primeiroNome, sobrenome, nomeUtilizador, numeroAluno, sala, corFavorita, possuiDaltonismo, genero, escola, perfil);
+        });
+    }
+
+    @Test
+    void naoDeveCriarAlunoComCampoCorFavoritaVazio() throws Exception {
+
+        String nomeUtilizador = "Bruna01";
+        int numeroAluno = 5;
+        String sala = "1B";
+        String corFavorita = "";
+        boolean possuiDaltonismo = true;
+
+        String primeiroNome = "Bruna";
+        String sobrenome = "Asa";
+        Genero genero = Genero.FEMININO;
+        Perfil perfil = Perfil.ALUNO;
+
+        Escola escola = new Escola("School", "Rua francisco da silva", "9234234445", "school@gmail.com");
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            new Aluno(primeiroNome, sobrenome, nomeUtilizador, numeroAluno, sala, corFavorita, possuiDaltonismo, genero, escola, perfil);
+        });
     }
 }

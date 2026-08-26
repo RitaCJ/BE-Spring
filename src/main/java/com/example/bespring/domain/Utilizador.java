@@ -4,8 +4,11 @@ import com.example.bespring.domain.enums.Genero;
 import com.example.bespring.domain.enums.Perfil;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED) //Será feita uma junção através das chaves estrangeiras.
 public class Utilizador {
 
     //Defini a chave primária
@@ -41,11 +44,19 @@ public class Utilizador {
 
     }
 
-    public Utilizador(String primeiroNome, String sobrenome, Genero genero, Perfil perfil) {
+    public Utilizador(String primeiroNome, String sobrenome, Genero genero, Perfil perfil, Escola escola) {
+
+        if(primeiroNome == null || primeiroNome.isBlank()){
+            throw new IllegalArgumentException("O primeiro nome não pode ser vázio");
+        }else if(sobrenome == null || sobrenome.isBlank()){
+            throw new IllegalArgumentException("O sobrenome não pode ser vázio");
+        }
+
         this.primeiroNome = primeiroNome;
         this.sobrenome = sobrenome;
         this.genero = genero;
         this.perfil = perfil;
+        this.escola = escola;
     }
 
     public Long getIdUtilizador() {
@@ -84,4 +95,11 @@ public class Utilizador {
         this.perfil = perfil;
     }
 
+    public Escola getEscola() {
+        return escola;
+    }
+
+    public void setEscola(Escola escola) {
+        this.escola = escola;
+    }
 }
