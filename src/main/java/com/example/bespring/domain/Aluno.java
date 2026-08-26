@@ -35,11 +35,16 @@ public class Aluno extends Utilizador {
     @Column(nullable = false)
     private boolean possuiDaltonismo;
 
+    @NotEmpty
+    @ManyToOne
+    @JoinColumn(name = "id_turma", nullable = true)//Aluno não é obrigado a estar associado a uma turma.
+    private Turma turma;
+
     public Aluno() {
 
     }
 
-    public Aluno(String primeiroNome, String sobrenome, String nomeUtilizador, int numeroAluno, String sala, String corFavorita, Boolean possuiDaltonismo, Genero genero, Escola escola, Perfil perfil) {
+    public Aluno(String primeiroNome, String sobrenome, String nomeUtilizador, int numeroAluno, String sala, String corFavorita, Boolean possuiDaltonismo, Genero genero, Escola escola, Perfil perfil, Turma turma) {
 
         if(primeiroNome == null || primeiroNome.isBlank()){
             throw new IllegalArgumentException("O primeiro nome não pode ser vázio");
@@ -63,9 +68,9 @@ public class Aluno extends Utilizador {
         this.setGenero(genero);
         this.setEscola(escola); //escola - variavel ou parametro
         this.setPerfil(Perfil.ALUNO); //Perfil - enum
+        this.turma = turma;
 
     }
-
 
 
 }

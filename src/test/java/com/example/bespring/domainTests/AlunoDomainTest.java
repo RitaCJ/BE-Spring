@@ -2,6 +2,7 @@ package com.example.bespring.domainTests;
 
 import com.example.bespring.domain.Aluno;
 import com.example.bespring.domain.Escola;
+import com.example.bespring.domain.Turma;
 import com.example.bespring.domain.Utilizador;
 import com.example.bespring.domain.enums.Genero;
 import com.example.bespring.domain.enums.Perfil;
@@ -28,7 +29,9 @@ public class AlunoDomainTest {
 
         Escola escola = new Escola("School", "Rua francisco da silva", "9234234445", "school@gmail.com");
 
-        Aluno aluno = new Aluno(primeiroNome, sobrenome, nomeUtilizador, numeroAluno, sala, corFavorita, possuiDaltonismo, genero, escola, perfil);
+        Turma turma = new Turma("Flor", "4B", 2026, "3º", "Flores verdes");
+
+        Aluno aluno = new Aluno(primeiroNome, sobrenome, nomeUtilizador, numeroAluno, sala, corFavorita, possuiDaltonismo, genero, escola, perfil, turma);
 
         assertEquals(primeiroNome, aluno.getPrimeiroNome());
         assertEquals(sobrenome, aluno.getSobrenome());
@@ -40,6 +43,7 @@ public class AlunoDomainTest {
         assertEquals(genero, aluno.getGenero());
         assertEquals(escola, aluno.getEscola());
         assertEquals(perfil, aluno.getPerfil());
+        assertEquals(turma, aluno.getTurma());
     }
 
     @Test
@@ -58,8 +62,10 @@ public class AlunoDomainTest {
 
         Escola escola = new Escola("School", "Rua francisco da silva", "9234234445", "school@gmail.com");
 
+        Turma turma = new Turma("Flor", "4B", 2026, "3º", "Flores verdes");
+
         assertThrows(IllegalArgumentException.class, () -> {
-            new Aluno(primeiroNome, sobrenome, nomeUtilizador, numeroAluno, sala, corFavorita, possuiDaltonismo, genero, escola, perfil);
+            new Aluno(primeiroNome, sobrenome, nomeUtilizador, numeroAluno, sala, corFavorita, possuiDaltonismo, genero, escola, perfil, turma);
         });
     }
 
@@ -79,8 +85,10 @@ public class AlunoDomainTest {
 
         Escola escola = new Escola("School", "Rua francisco da silva", "9234234445", "school@gmail.com");
 
+        Turma turma = new Turma("Flor", "4B", 2026, "3º", "Flores verdes");
+
         assertThrows(IllegalArgumentException.class, () -> {
-            new Aluno(primeiroNome, sobrenome, nomeUtilizador, numeroAluno, sala, corFavorita, possuiDaltonismo, genero, escola, perfil);
+            new Aluno(primeiroNome, sobrenome, nomeUtilizador, numeroAluno, sala, corFavorita, possuiDaltonismo, genero, escola, perfil, turma);
         });
     }
 
@@ -100,8 +108,10 @@ public class AlunoDomainTest {
 
         Escola escola = new Escola("School", "Rua francisco da silva", "9234234445", "school@gmail.com");
 
+        Turma turma = new Turma("Flor", "4B", 2026, "3º", "Flores verdes");
+
         assertThrows(IllegalArgumentException.class, () -> {
-            new Aluno(primeiroNome, sobrenome, nomeUtilizador, numeroAluno, sala, corFavorita, possuiDaltonismo, genero, escola, perfil);
+            new Aluno(primeiroNome, sobrenome, nomeUtilizador, numeroAluno, sala, corFavorita, possuiDaltonismo, genero, escola, perfil, turma);
         });
 
     }
@@ -122,8 +132,10 @@ public class AlunoDomainTest {
 
         Escola escola = new Escola("School", "Rua francisco da silva", "9234234445", "school@gmail.com");
 
+        Turma turma = new Turma("Flor", "4B", 2026, "3º", "Flores verdes");
+
         assertThrows(IllegalArgumentException.class, () -> {
-            new Aluno(primeiroNome, sobrenome, nomeUtilizador, numeroAluno, sala, corFavorita, possuiDaltonismo, genero, escola, perfil);
+            new Aluno(primeiroNome, sobrenome, nomeUtilizador, numeroAluno, sala, corFavorita, possuiDaltonismo, genero, escola, perfil, turma);
         });
     }
 
@@ -143,8 +155,10 @@ public class AlunoDomainTest {
 
         Escola escola = new Escola("School", "Rua francisco da silva", "9234234445", "school@gmail.com");
 
+        Turma turma = new Turma("Flor", "4B", 2026, "3º", "Flores verdes");
+
         assertThrows(IllegalArgumentException.class, () -> {
-            new Aluno(primeiroNome, sobrenome, nomeUtilizador, numeroAluno, sala, corFavorita, possuiDaltonismo, genero, escola, perfil);
+            new Aluno(primeiroNome, sobrenome, nomeUtilizador, numeroAluno, sala, corFavorita, possuiDaltonismo, genero, escola, perfil, turma);
         });
     }
 }
