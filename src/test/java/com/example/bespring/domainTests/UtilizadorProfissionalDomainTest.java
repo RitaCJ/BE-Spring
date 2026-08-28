@@ -22,7 +22,7 @@ public class UtilizadorProfissionalDomainTest {
         String email = "ana@gmail.com";
         String senha = "Feliznatal2026%";
         TipoProfissional tipo = TipoProfissional.PROFESSOR;
-        Perfil perfil = Perfil.ALUNO;
+        Perfil perfil = Perfil.PROFESSOR;
 
         Escola escola = new Escola("School", "Rua francisco da silva", "9234234445", "school@gmail.com");
 

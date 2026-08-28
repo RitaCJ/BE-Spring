@@ -43,12 +43,17 @@ public class Turma {
     @OneToMany(mappedBy = "turma")
     private List<Aluno> alunos;
 
+    @NotEmpty
+    @ManyToOne
+    @JoinColumn(name = "professor_id", nullable = false)
+    private Professor professor;
+
 
     public Turma() {
 
     }
 
-    public Turma(String nome, String sala, int anoLetivo, String anoSerie, String descricao) {
+    public Turma(String nome, String sala, int anoLetivo, String anoSerie, String descricao, Professor professor) {
 
         if(nome == null || nome.isBlank()){
             throw new IllegalArgumentException("O campo nome não deve estar vázio.");
@@ -67,6 +72,7 @@ public class Turma {
         this.anoLetivo = anoLetivo;
         this.anoSerie = anoSerie;
         this.descricao = descricao;
+        this.professor = professor;
     }
 
 

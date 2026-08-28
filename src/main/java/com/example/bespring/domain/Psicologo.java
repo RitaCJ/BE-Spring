@@ -4,29 +4,21 @@ import com.example.bespring.domain.enums.Genero;
 import com.example.bespring.domain.enums.Perfil;
 import com.example.bespring.domain.enums.TipoProfissional;
 import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrimaryKeyJoinColumn;
-import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.util.List;
 
 @Entity
 @Getter
 @Setter
 @PrimaryKeyJoinColumn(name = "idUtilizador")
-public class Professor extends UtilizadorProfissional{
+public class Psicologo extends UtilizadorProfissional{
 
-    @NotEmpty
-    @OneToMany(mappedBy = "professor")
-    private List<Turma> turmas;
-
-    public Professor() {
+    public Psicologo(){
 
     }
 
-    public Professor(String primeiroNome, String sobrenome, String telefone, Genero genero, String email, String senha, TipoProfissional tipo, Perfil perfil, Escola escola){
+    public Psicologo(String primeiroNome, String sobrenome, String telefone, Genero genero, String email, String senha, TipoProfissional tipo, Perfil perfil, Escola escola){
 
         if(primeiroNome == null || primeiroNome.isBlank()){
             throw new IllegalArgumentException("O campo primeiro nome não pode estar vazio.");
@@ -50,4 +42,5 @@ public class Professor extends UtilizadorProfissional{
         this.setPerfil(perfil);
         this.setEscola(escola);
     }
+
 }

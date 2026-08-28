@@ -1,11 +1,9 @@
 package com.example.bespring.domainTests;
 
-import com.example.bespring.domain.Aluno;
-import com.example.bespring.domain.Escola;
-import com.example.bespring.domain.Turma;
-import com.example.bespring.domain.Utilizador;
+import com.example.bespring.domain.*;
 import com.example.bespring.domain.enums.Genero;
 import com.example.bespring.domain.enums.Perfil;
+import com.example.bespring.domain.enums.TipoProfissional;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -29,7 +27,9 @@ public class AlunoDomainTest {
 
         Escola escola = new Escola("School", "Rua francisco da silva", "9234234445", "school@gmail.com");
 
-        Turma turma = new Turma("Flor", "4B", 2026, "3º", "Flores verdes");
+        Professor professor = new Professor("Bruna", "Asa", "993838844", Genero.FEMININO, "bruna@gmail.com", "@Bemvindo123", TipoProfissional.PROFESSOR,  Perfil.PROFESSOR, escola);
+
+        Turma turma = new Turma("Flor", "4B", 2026, "3º", "Flores verdes", professor);
 
         Aluno aluno = new Aluno(primeiroNome, sobrenome, nomeUtilizador, numeroAluno, sala, corFavorita, possuiDaltonismo, genero, escola, perfil, turma);
 
@@ -62,7 +62,9 @@ public class AlunoDomainTest {
 
         Escola escola = new Escola("School", "Rua francisco da silva", "9234234445", "school@gmail.com");
 
-        Turma turma = new Turma("Flor", "4B", 2026, "3º", "Flores verdes");
+        Professor professor = new Professor("Bruna", "Asa", "993838844", Genero.FEMININO, "bruna@gmail.com", "@Bemvindo123", TipoProfissional.PROFESSOR,  Perfil.PROFESSOR, escola);
+
+        Turma turma = new Turma("Flor", "4B", 2026, "3º", "Flores verdes", professor);
 
         assertThrows(IllegalArgumentException.class, () -> {
             new Aluno(primeiroNome, sobrenome, nomeUtilizador, numeroAluno, sala, corFavorita, possuiDaltonismo, genero, escola, perfil, turma);
@@ -85,7 +87,9 @@ public class AlunoDomainTest {
 
         Escola escola = new Escola("School", "Rua francisco da silva", "9234234445", "school@gmail.com");
 
-        Turma turma = new Turma("Flor", "4B", 2026, "3º", "Flores verdes");
+        Professor professor = new Professor("Bruna", "Asa", "993838844", Genero.FEMININO, "bruna@gmail.com", "@Bemvindo123", TipoProfissional.PROFESSOR,  Perfil.PROFESSOR, escola);
+
+        Turma turma = new Turma("Flor", "4B", 2026, "3º", "Flores verdes", professor);
 
         assertThrows(IllegalArgumentException.class, () -> {
             new Aluno(primeiroNome, sobrenome, nomeUtilizador, numeroAluno, sala, corFavorita, possuiDaltonismo, genero, escola, perfil, turma);
@@ -108,7 +112,9 @@ public class AlunoDomainTest {
 
         Escola escola = new Escola("School", "Rua francisco da silva", "9234234445", "school@gmail.com");
 
-        Turma turma = new Turma("Flor", "4B", 2026, "3º", "Flores verdes");
+        Professor professor = new Professor("Bruna", "Asa", "993838844", Genero.FEMININO, "bruna@gmail.com", "@Bemvindo123", TipoProfissional.PROFESSOR,  Perfil.PROFESSOR, escola);
+
+        Turma turma = new Turma("Flor", "4B", 2026, "3º", "Flores verdes", professor);
 
         assertThrows(IllegalArgumentException.class, () -> {
             new Aluno(primeiroNome, sobrenome, nomeUtilizador, numeroAluno, sala, corFavorita, possuiDaltonismo, genero, escola, perfil, turma);
@@ -132,7 +138,9 @@ public class AlunoDomainTest {
 
         Escola escola = new Escola("School", "Rua francisco da silva", "9234234445", "school@gmail.com");
 
-        Turma turma = new Turma("Flor", "4B", 2026, "3º", "Flores verdes");
+        Professor professor = new Professor("Bruna", "Asa", "993838844", Genero.FEMININO, "bruna@gmail.com", "@Bemvindo123", TipoProfissional.PROFESSOR,  Perfil.PROFESSOR, escola);
+
+        Turma turma = new Turma("Flor", "4B", 2026, "3º", "Flores verdes", professor);
 
         assertThrows(IllegalArgumentException.class, () -> {
             new Aluno(primeiroNome, sobrenome, nomeUtilizador, numeroAluno, sala, corFavorita, possuiDaltonismo, genero, escola, perfil, turma);
@@ -155,7 +163,9 @@ public class AlunoDomainTest {
 
         Escola escola = new Escola("School", "Rua francisco da silva", "9234234445", "school@gmail.com");
 
-        Turma turma = new Turma("Flor", "4B", 2026, "3º", "Flores verdes");
+        Professor professor = new Professor("Bruna", "Asa", "993838844", Genero.FEMININO, "bruna@gmail.com", "@Bemvindo123", TipoProfissional.PROFESSOR,  Perfil.PROFESSOR, escola);
+
+        Turma turma = new Turma("Flor", "4B", 2026, "3º", "Flores verdes", professor);
 
         assertThrows(IllegalArgumentException.class, () -> {
             new Aluno(primeiroNome, sobrenome, nomeUtilizador, numeroAluno, sala, corFavorita, possuiDaltonismo, genero, escola, perfil, turma);
