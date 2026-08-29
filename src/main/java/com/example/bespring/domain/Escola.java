@@ -17,11 +17,11 @@ public class Escola {
     private Long idEscola;
 
     @NotEmpty
-    @Column(length = 25, nullable = false)
+    @Column(length = 40, nullable = false)
     private String nome;
 
     @NotEmpty
-    @Column(length = 30, nullable = false)
+    @Column(length = 60, nullable = false)
     private String endereco;
 
     @NotEmpty
