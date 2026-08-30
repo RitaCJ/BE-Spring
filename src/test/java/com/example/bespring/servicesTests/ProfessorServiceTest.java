@@ -5,6 +5,7 @@ import com.example.bespring.domain.Professor;
 import com.example.bespring.domain.enums.Genero;
 import com.example.bespring.domain.enums.TipoProfissional;
 import com.example.bespring.dto.CriarProfessorRequest;
+import com.example.bespring.repository.EscolaRepository;
 import com.example.bespring.repository.ProfessorRepository;
 import com.example.bespring.services.ProfessorService;
 import org.junit.jupiter.api.DisplayName;
@@ -17,9 +18,12 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -30,6 +34,9 @@ public class ProfessorServiceTest {
 
     @InjectMocks
     private ProfessorService professorService;
+
+    @Mock
+    private EscolaRepository escolaRepository;
 
     //Subclass
     @Nested
@@ -50,9 +57,13 @@ public class ProfessorServiceTest {
             professor.setGenero(Genero.MASCULINO);
 
             Escola escola = new Escola("School", "Rua francisco da silva", "9234234445", "school@gmail.com");
-
+            escola.setIdEscola(1L);
             professor.setEscola(escola);
 
+            //Mock sobre a "procura" da escola.
+            when(escolaRepository.findById(1L)).thenReturn(Optional.of(escola));
+
+            //O Mock para o "save"
             when(professorRepository.save(any(Professor.class))).thenAnswer(
                     invocation -> {
                         Professor professor1 = invocation.getArgument(0);
@@ -70,7 +81,7 @@ public class ProfessorServiceTest {
                     professor.getSenha(),
                     professor.getTipo(),
                     professor.getPerfil(),
-                    professor.getEscola()
+                    professor.getEscola().getIdEscola()
             );
 
             Professor result = professorService.cadastrarProfessor(request);
@@ -86,7 +97,13 @@ public class ProfessorServiceTest {
             assertEquals(professor.getSenha(), result.getSenha());
             assertEquals(professor.getTipo(), result.getTipo());
             assertEquals(professor.getGenero(), result.getGenero());
-            assertEquals(professor.getEscola(), result.getEscola());
+            assertEquals(1L, result.getEscola().getIdEscola());
+
+            //Verificar se procurou pela escola.
+            verify(escolaRepository).findById(1L);
+
+            //Verificar se guardou o professor
+            verify(professorRepository).save(any(Professor.class));
 
         }
 

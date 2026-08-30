@@ -27,17 +27,15 @@ public class Utilizador {
     @Column(length = 15, nullable = false)
     private String sobrenome;
 
-    @NotEmpty
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Genero genero;
 
-    @NotEmpty
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Perfil perfil;
 
-    @NotEmpty
+    
     @ManyToOne //Flag - Muitos utilizadores para uma escola.
     @JoinColumn(name = "escola_id", nullable = false)
     private Escola escola;

@@ -18,7 +18,7 @@ import java.util.List;
 @PrimaryKeyJoinColumn(name = "idUtilizador")
 public class Professor extends UtilizadorProfissional{
 
-    @NotEmpty
+
     @OneToMany(mappedBy = "professor")
     private List<Turma> turmas;
 

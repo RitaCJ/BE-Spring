@@ -28,7 +28,6 @@ public class UtilizadorProfissional extends Utilizador{
     @Size(min = 8, max = 30)
     private String senha;
 
-    @NotEmpty
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private TipoProfissional tipo;
