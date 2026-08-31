@@ -1,4 +1,4 @@
-#  Plataforma Adaptativa de Rastreio Precoce de Discalculia Através da Gamificação - Backend
+# Plataforma Adaptativa de Rastreio Precoce de Discalculia Através da Gamificação - Backend
 
 ![MariaDB](https://img.shields.io/badge/MariaDB-%23003545.svg?style=for-the-badge&logo=mariadb&logoColor=white)
 ![Drawio](https://img.shields.io/badge/drawio-%23F08705.svg?style=for-the-badge&logo=diagrams.net&logoColor=white)
@@ -14,15 +14,12 @@
 - [Estrutura do projeto](#estruturadoprojecto)
 - [Pre-Requisitos](#prerequisitos)
 - [Instalação](#instalação)
-- [Configuração](#configuração)
 - [Execução](#execução)
-- [Instrução de instalação](#instrucaçãodeinstalação)
 - [API Endepoints](#apiendpoints)
 - [Licença](#licença)
 - [Contrubuição](#contribuição)
 
 ## Descrição
-
 Sistema adaptativo com elementos de gamificação para apoiar o rastreio precoce de sinais de discalculia em crianças de 8 anos. O sistema será utilizado por psicologos, professores e alunos. Será disponibilizado na plataforma um conjunto de avaliações que ajudaram na identificação de indícios de discalculia. 
 
 ## ⚙️ Arquitetura
