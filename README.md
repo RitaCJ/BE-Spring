@@ -8,7 +8,7 @@
 ![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
 
 # Índice 
-- [Descrição](#Titulo)
+- [Descrição](#Descrição)
 - [Arquitetura](#Arquitetura)
 - [Tecnologias](#tecnologias)
 - [Estrutura do projeto](#estruturadoprojecto)
@@ -17,7 +17,7 @@
 - [Execução](#execução)
 - [API Endepoints](#apiendpoints)
 - [Licença](#licença)
-- [Contrubuição](#Contribuição)
+- [Contrubuição](#Contribuicao)
 
 ## Descrição
 Sistema adaptativo com elementos de gamificação para apoiar o rastreio precoce de sinais de discalculia em crianças de 8 anos. O sistema será utilizado por psicologos, professores e alunos. Será disponibilizado na plataforma um conjunto de avaliações que ajudaram na identificação de indícios de discalculia. 
@@ -27,8 +27,8 @@ Sistema adaptativo com elementos de gamificação para apoiar o rastreio precoce
 
 ## 💻 Tecnologias
 - Spring Boot
-#### MariaDB
-#### JWT 
+- MariaDB
+- JWT 
 
 ## 🗂️ Estrutura do projecto
 ```text
@@ -44,8 +44,8 @@ Sistema adaptativo com elementos de gamificação para apoiar o rastreio precoce
 ```
 
 ## 📋 Pré-requisitos
-#### MariaDB 
-#### Git
+- MariaDB
+- Git
 
 ## 📥 Instalação 
 
