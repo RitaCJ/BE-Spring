@@ -9,7 +9,7 @@
 
 # Índice 
 - [Descrição](#Descrição)
-- [Arquitetura](#Arquitetura)
+- [Arquitetura](#-arquitetura)
 - [Tecnologias](#tecnologias)
 - [Estrutura do projeto](#estrutura-do-projecto)
 - [Pre-Requisitos](#pre-requisitos)
@@ -17,7 +17,7 @@
 - [Execução](#execução)
 - [API Endepoints](#api-endpoints)
 - [Licença](#Licença)
-- [Contrubuição](#Contribuicao)
+- [Contrubuição](#-Contribuicao)
 
 ## Descrição
 Sistema adaptativo com elementos de gamificação para apoiar o rastreio precoce de sinais de discalculia em crianças de 8 anos. O sistema será utilizado por psicologos, professores e alunos. Será disponibilizado na plataforma um conjunto de avaliações que ajudaram na identificação de indícios de discalculia. 
