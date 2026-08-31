@@ -11,12 +11,12 @@
 - [Descrição](#Descrição)
 - [Arquitetura](#Arquitetura)
 - [Tecnologias](#tecnologias)
-- [Estrutura do projeto](#estruturadoprojecto)
-- [Pre-Requisitos](#prerequisitos)
+- [Estrutura do projeto](#estrutura-do-projecto)
+- [Pre-Requisitos](#pre-requisitos)
 - [Instalação](#instalação)
 - [Execução](#execução)
-- [API Endepoints](#apiendpoints)
-- [Licença](#licença)
+- [API Endepoints](#api-endpoints)
+- [Licença](#Licença)
 - [Contrubuição](#Contribuicao)
 
 ## Descrição
