@@ -9,27 +9,32 @@
 
 # Índice 
 - [Descrição](#descrição)
+- [Arquitetura](#arquitetura)
+- [Tecnologias](#tecnologias)
+- [Estrutura do projeto](#estruturadoprojecto)
+- [Pre-Requisitos](#prerequisitos)
+- [Instalação](#instalação)
+- [Configuração](#configuração)
+- [Execução](#execução)
+- [Instrução de instalação](#instrucaçãodeinstalação)
+- [API Endepoints](#apiendpoints)
+- [Licença](#licença)
+- [Contrubuição](#contribuição)
 
 ## Descrição
-O que faz o app
-Com o que é construido
-Por que?
 
-### O backend é responsável por: 
-Gestão de alunos;
-Gestão de turmas;
-Autenticação de utilizadores;
+Sistema adaptativo com elementos de gamificação para apoiar o rastreio precoce de sinais de discalculia em crianças de 8 anos. O sistema será utilizado por psicologos, professores e alunos. Será disponibilizado na plataforma um conjunto de avaliações que ajudaram na identificação de indícios de discalculia. 
 
-## Arquitetura
+## <img width="512" height="512" alt="arquitetura" src="https://github.com/user-attachments/assets/f49236fc-8d57-4ba9-b5d5-a7cd82e1fa7c" />
+Arquitetura
+
 
 ## Tecnologias
-Spring Boot
-MariaDB
-JWT 
+### Spring Boot
+### MariaDB
+### JWT 
 
 ## Estrutura do projecto
-
-
 
 ## Pré-requisitos
 MariaDB 
