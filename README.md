@@ -8,7 +8,7 @@
 ![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
 
 # Índice 
-- [Descrição](#Descrição)
+- [Descrição](#Titulo)
 - [Arquitetura](#Arquitetura)
 - [Tecnologias](#tecnologias)
 - [Estrutura do projeto](#estruturadoprojecto)
@@ -26,7 +26,7 @@ Sistema adaptativo com elementos de gamificação para apoiar o rastreio precoce
 
 
 ## 💻 Tecnologias
-#### Spring Boot
+- Spring Boot
 #### MariaDB
 #### JWT 
 
