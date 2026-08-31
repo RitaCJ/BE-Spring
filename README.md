@@ -9,7 +9,7 @@
 
 # Índice 
 - [Descrição](#Descrição)
-- [Arquitetura](#-arquitetura)
+- [Arquitetura](#arquitetura)
 - [Tecnologias](#tecnologias)
 - [Estrutura do projeto](#estrutura-do-projecto)
 - [Pre-Requisitos](#pre-requisitos)
