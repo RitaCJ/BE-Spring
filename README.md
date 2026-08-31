@@ -25,36 +25,42 @@
 
 Sistema adaptativo com elementos de gamificação para apoiar o rastreio precoce de sinais de discalculia em crianças de 8 anos. O sistema será utilizado por psicologos, professores e alunos. Será disponibilizado na plataforma um conjunto de avaliações que ajudaram na identificação de indícios de discalculia. 
 
-## 🏛️ Arquitetura
+## ⚙️ Arquitetura
 
 
-## Tecnologias
-### Spring Boot
-### MariaDB
-### JWT 
+## 💻 Tecnologias
+#### Spring Boot
+#### MariaDB
+#### JWT 
 
-## Estrutura do projecto
-
-## Pré-requisitos
-MariaDB 
-
-## Instalação 
-
-## Configuração
-
-## Execução
-
-## Instrução de instalação 
-
-## API Endpoints
-```bash
-1. Abra localhost:8080
-2. Faça Login
-3. Use 
+## 🗂️ Estrutura do projecto
+```text
+📦 Projecto
+|-----🗂️ src 
+|      |----- 🗂️ Domain
+|      |----- 🗂️ Controller
+|      |----- 🗂️ Repository
+|      |----- 🗂️ DTO
+|      |----- 🗂️ Service
+|      |----- 🗂️ Security 
+|     
 ```
 
-## Licença 
-### Educacional e não comercial
+## 📋 Pré-requisitos
+#### MariaDB 
+#### Git
 
-## Contribuição
+## 📥 Instalação 
+
+## 🚀 Execução 
+
+## 🔌 API Endpoints
+```bash
+Post: 
+```
+
+## 📜 Licença 
+#### Educacional e não comercial
+
+## 🤝 Contribuição
 
