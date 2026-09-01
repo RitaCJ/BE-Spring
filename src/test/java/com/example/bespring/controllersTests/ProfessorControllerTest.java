@@ -19,6 +19,8 @@ import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import tools.jackson.databind.ObjectMapper;
 
+import java.util.List;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -26,7 +28,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
 //Será testado apenas a camada Web/Mvc do ProfessorController.
 @WebMvcTest(controllers = ProfessorController.class)
@@ -108,6 +110,90 @@ public class ProfessorControllerTest {
                 .andExpect(jsonPath("$.idEscola").value(escola.getIdEscola()));
 
                 verify(professorService).cadastrarProfessor(any(CriarProfessorRequest.class));
+    }
+
+    @Test
+    void deveProcurarProfessorPorId() throws Exception {
+
+        Escola escola = new Escola("School", "Rua francisco da silva", "9234234445", "school@gmail.com");
+        escola.setIdEscola(1L);
+
+        Professor professor = new Professor();
+        professor.setIdUtilizador(1L);
+        long id = 1L;
+
+        professor.setEscola(escola);
+
+        when(professorService.procurarProfessorPorId(id)).thenReturn(professor);
+
+        mockMvc.perform(get("/api/professores/{idUtilizador}", id))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.idUtilizador").value(1L))
+                .andExpect(jsonPath("$.idEscola").value(escola.getIdEscola()));
+
+        verify(professorService).procurarProfessorPorId(id);
+
+    }
+
+    @Test
+    void deveListarProfessores() throws Exception {
+
+        Professor professor1 = new Professor();
+        professor1.setIdUtilizador(1L);
+        professor1.setPrimeiroNome("Akin");
+        professor1.setSobrenome("Asa");
+        professor1.setEmail("asa@gmail.com");
+        professor1.setTelefone("123456789");
+        professor1.setSenha("@MarEMar2000");
+        professor1.setTipo(TipoProfissional.PROFESSOR);
+        professor1.setGenero(Genero.MASCULINO);
+        professor1.setPerfil(Perfil.PROFESSOR);
+
+        Escola escola = new Escola("School", "Rua francisco da silva", "9234234445", "school@gmail.com");
+        escola.setIdEscola(1L);
+        professor1.setEscola(escola);
+
+        Professor professor2 = new Professor();
+        professor2.setIdUtilizador(2L);
+        professor2.setPrimeiroNome("Lua");
+        professor2.setSobrenome("Luna");
+        professor2.setEmail("lua@gmail.com");
+        professor2.setTelefone("923234323");
+        professor2.setSenha("LunarELua4000#");
+        professor2.setTipo(TipoProfissional.PROFESSOR);
+        professor2.setGenero(Genero.FEMININO);
+        professor2.setPerfil(Perfil.PROFESSOR);
+
+        professor2.setEscola(escola);
+
+        when(professorService.listarProfessores()).thenReturn(
+                List.of(professor1, professor2));
+
+        mockMvc.perform(get("/api/professores"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$").isArray())
+                .andExpect(jsonPath("$.length()").value(2))
+                .andExpect(jsonPath("$[0].idUtilizador").value(1L))
+                .andExpect(jsonPath("$[0].primeiroNome").value("Akin"))
+                .andExpect(jsonPath("$[0].sobrenome").value("Asa"))
+                .andExpect(jsonPath("$[0].email").value("asa@gmail.com"))
+                .andExpect(jsonPath("$[0].telefone").value("123456789"))
+                .andExpect(jsonPath("$[0].tipo").value(TipoProfissional.PROFESSOR.toString()))
+                .andExpect(jsonPath("$[0].genero").value(Genero.MASCULINO.toString()))
+                .andExpect(jsonPath("$[0].perfil").value(Perfil.PROFESSOR.toString()))
+                .andExpect(jsonPath("$[0].idEscola").value(escola.getIdEscola()))
+                .andExpect(jsonPath("$[1].idUtilizador").value(2L))
+                .andExpect(jsonPath("$[1].primeiroNome").value("Lua"))
+                .andExpect(jsonPath("$[1].sobrenome").value("Luna"))
+                .andExpect(jsonPath("$[1].email").value("lua@gmail.com"))
+                .andExpect(jsonPath("$[1].telefone").value("923234323"))
+                .andExpect(jsonPath("$[1].tipo").value(TipoProfissional.PROFESSOR.toString()))
+                .andExpect(jsonPath("$[1].genero").value(Genero.FEMININO.toString()))
+                .andExpect(jsonPath("$[1].perfil").value(Perfil.PROFESSOR.toString()))
+                .andExpect(jsonPath("$[1].idEscola").value(escola.getIdEscola()));
+
+                verify(professorService).listarProfessores();
+
     }
 
 }

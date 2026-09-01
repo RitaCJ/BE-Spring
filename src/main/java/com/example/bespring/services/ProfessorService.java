@@ -8,6 +8,9 @@ import com.example.bespring.repository.ProfessorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
 public class ProfessorService {
 
@@ -39,6 +42,19 @@ public class ProfessorService {
         );
 
       return professorRepository.save(entityProfessor);
+
+    }
+
+    public Professor procurarProfessorPorId(Long id){
+
+        return professorRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Professor não encontrado com o id " + id));
+
+    }
+
+    public List<Professor> listarProfessores(){
+
+        return professorRepository.findAll();
 
     }
 
