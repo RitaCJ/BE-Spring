@@ -22,13 +22,11 @@ import tools.jackson.databind.ObjectMapper;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
 //Será testado apenas a camada Web/Mvc do ProfessorController.
 @WebMvcTest(controllers = ProfessorController.class)
@@ -193,6 +191,28 @@ public class ProfessorControllerTest {
                 .andExpect(jsonPath("$[1].idEscola").value(escola.getIdEscola()));
 
                 verify(professorService).listarProfessores();
+    }
+
+    @Test
+    void deveApagarProfessorPorId() throws Exception {
+
+        Escola escola = new Escola("School", "Rua francisco da silva", "9234234445", "school@gmail.com");
+        escola.setIdEscola(1L);
+
+        Professor professor = new Professor();
+        professor.setIdUtilizador(1L);
+        long id = 1L;
+
+        professor.setEscola(escola);
+
+        doNothing().when(professorService).apagarProfessor(id);
+
+        mockMvc.perform(delete("/api/professores/{idUtilizador}", id))
+                .andExpect(status().isNoContent());
+
+
+        verify(professorService).apagarProfessor(id);
+
 
     }
 
