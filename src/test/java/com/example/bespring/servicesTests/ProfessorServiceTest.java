@@ -5,6 +5,7 @@ import com.example.bespring.domain.Professor;
 import com.example.bespring.domain.enums.Genero;
 import com.example.bespring.domain.enums.Perfil;
 import com.example.bespring.domain.enums.TipoProfissional;
+import com.example.bespring.dto.AtualizarProfessorRequest;
 import com.example.bespring.dto.CriarProfessorRequest;
 import com.example.bespring.repository.EscolaRepository;
 import com.example.bespring.repository.ProfessorRepository;
@@ -185,6 +186,49 @@ public class ProfessorServiceTest {
         }
     }
 
+
+
+    @Nested
+    class AtualizarProfessor{
+
+        @Test
+        void deveAtualizarProfessor(){
+
+            Professor professor = new Professor();
+            professor.setIdUtilizador(1L);
+            professor.setPrimeiroNome("Zaburi");
+            professor.setSobrenome("Rui");
+            professor.setEmail("zaburi@gmail.com");
+            professor.setTelefone("123456789");
+            professor.setSenha("@MarEMar2000");
+            professor.setGenero(Genero.MASCULINO);
+
+            long id = 1L;
+
+            AtualizarProfessorRequest professorRequest = new AtualizarProfessorRequest(
+                    professor.getPrimeiroNome(),
+                    professor.getSobrenome(),
+                    professor.getTelefone(),
+                    professor.getGenero(),
+                    professor.getEmail(),
+                    professor.getSenha()
+            );
+
+            when(professorRepository.findById(1L)).thenReturn(Optional.of(professor));
+
+            when(professorRepository.save(any(Professor.class))).thenReturn(professor);
+
+            professorService.atualizarProfessor(id, professorRequest);
+
+            verify(professorRepository).findById(id);
+            verify(professorRepository).save(professor);
+
+        }
+
+
+    }
+
+
     @Nested
     class ApagarProfessor{
 
@@ -203,5 +247,6 @@ public class ProfessorServiceTest {
         }
 
     }
+
 
 }

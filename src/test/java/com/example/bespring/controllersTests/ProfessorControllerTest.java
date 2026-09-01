@@ -6,6 +6,7 @@ import com.example.bespring.domain.Professor;
 import com.example.bespring.domain.enums.Genero;
 import com.example.bespring.domain.enums.Perfil;
 import com.example.bespring.domain.enums.TipoProfissional;
+import com.example.bespring.dto.AtualizarProfessorRequest;
 import com.example.bespring.dto.CriarProfessorRequest;
 import com.example.bespring.dto.CriarProfessorResponse;
 import com.example.bespring.services.ProfessorService;
@@ -194,6 +195,44 @@ public class ProfessorControllerTest {
     }
 
     @Test
+    void deveAtualizarProfessor() throws Exception{
+
+        Professor professor = new Professor();
+        professor.setIdUtilizador(1L);
+        professor.setPrimeiroNome("Zaburi");
+        professor.setSobrenome("Shuri");
+        professor.setEmail("zaburi12@gmail.com");
+        professor.setTelefone("123456769");
+        professor.setSenha("@MarEMar2007");
+        professor.setGenero(Genero.MASCULINO);
+
+        long id = 1L;
+
+        AtualizarProfessorRequest professorRequest = new AtualizarProfessorRequest(
+                professor.getPrimeiroNome(),
+                professor.getSobrenome(),
+                professor.getTelefone(),
+                professor.getGenero(),
+                professor.getEmail(),
+                professor.getSenha()
+        );
+
+        doNothing().when(professorService).atualizarProfessor(id, professorRequest);
+
+        String json = objectMapper.writeValueAsString(professorRequest);
+
+        mockMvc.perform(put("/api/professores/{idUtilizador}", id)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(json))
+
+                .andExpect(status().isNoContent());
+
+                verify(professorService).atualizarProfessor(id, professorRequest);
+
+    }
+
+
+    @Test
     void deveApagarProfessorPorId() throws Exception {
 
         Escola escola = new Escola("School", "Rua francisco da silva", "9234234445", "school@gmail.com");
@@ -213,7 +252,8 @@ public class ProfessorControllerTest {
 
         verify(professorService).apagarProfessor(id);
 
-
     }
+
+
 
 }

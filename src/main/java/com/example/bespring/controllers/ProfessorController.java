@@ -5,6 +5,7 @@ import com.example.bespring.domain.Professor;
 import com.example.bespring.domain.enums.Genero;
 import com.example.bespring.domain.enums.Perfil;
 import com.example.bespring.domain.enums.TipoProfissional;
+import com.example.bespring.dto.AtualizarProfessorRequest;
 import com.example.bespring.dto.CriarProfessorRequest;
 import com.example.bespring.dto.CriarProfessorResponse;
 import com.example.bespring.services.ProfessorService;
@@ -88,6 +89,15 @@ public class ProfessorController {
 
         return ResponseEntity.status(HttpStatus.OK).body(professoresResponse);
     }
+
+    @PutMapping("/{idUtilizador}")
+    public ResponseEntity<Void> atualizarProfessor(@PathVariable Long idUtilizador,
+                                                   @RequestBody AtualizarProfessorRequest atualizarProfessorRequest) {
+         professorService.atualizarProfessor(idUtilizador, atualizarProfessorRequest);
+
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
 
     @DeleteMapping("/{idUtilizador}")
     public ResponseEntity<Void> deletarProfessor(@PathVariable Long idUtilizador) {
