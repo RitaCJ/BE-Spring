@@ -24,8 +24,7 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class ProfessorServiceTest {
@@ -186,5 +185,23 @@ public class ProfessorServiceTest {
         }
     }
 
+    @Nested
+    class ApagarProfessor{
+
+        @Test
+        void deveApagarProfessor(){
+
+            Professor professor = new Professor();
+            professor.setIdUtilizador(1L);
+            long id = 1L;
+
+            when(professorRepository.existsById(id)).thenReturn(true);
+
+            professorService.apagarProfessor(id);
+
+            verify(professorRepository).deleteById(id);
+        }
+
+    }
 
 }
