@@ -58,4 +58,13 @@ public class ProfessorService {
 
     }
 
+    public void apagarProfessor(Long id){
+
+        var professorExiste = professorRepository.existsById(id);
+
+        if(professorExiste){
+            professorRepository.deleteById(id);
+        }
+    }
+
 }
