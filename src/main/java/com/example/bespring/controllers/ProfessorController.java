@@ -88,4 +88,12 @@ public class ProfessorController {
 
         return ResponseEntity.status(HttpStatus.OK).body(professoresResponse);
     }
+
+    @DeleteMapping("/{idUtilizador}")
+    public ResponseEntity<Void> deletarProfessor(@PathVariable Long idUtilizador) {
+        professorService.apagarProfessor(idUtilizador);
+
+        return ResponseEntity.noContent().build();
+
+    }
 }
