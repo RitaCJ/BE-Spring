@@ -24,6 +24,8 @@ public class AlunoDomainTest {
         String sobrenome = "Asa";
         Genero genero = Genero.FEMININO;
         Perfil perfil = Perfil.ALUNO;
+        String senha = "123456";
+        String login = nomeUtilizador;
 
         Escola escola = new Escola("School", "Rua francisco da silva", "9234234445", "school@gmail.com");
 
@@ -31,7 +33,7 @@ public class AlunoDomainTest {
 
         Turma turma = new Turma("Flor", "4B", 2026, "3º", "Flores verdes", professor);
 
-        Aluno aluno = new Aluno(primeiroNome, sobrenome, nomeUtilizador, numeroAluno, sala, corFavorita, possuiDaltonismo, genero, escola, perfil, turma);
+        Aluno aluno = new Aluno(primeiroNome, sobrenome, nomeUtilizador, numeroAluno, sala, corFavorita, possuiDaltonismo, genero, escola, perfil, senha, login, turma);
 
         assertEquals(primeiroNome, aluno.getPrimeiroNome());
         assertEquals(sobrenome, aluno.getSobrenome());
@@ -43,6 +45,8 @@ public class AlunoDomainTest {
         assertEquals(genero, aluno.getGenero());
         assertEquals(escola, aluno.getEscola());
         assertEquals(perfil, aluno.getPerfil());
+        assertEquals(senha, aluno.getSenha());
+        assertEquals(login, aluno.getLogin());
         assertEquals(turma, aluno.getTurma());
     }
 
@@ -59,6 +63,8 @@ public class AlunoDomainTest {
         String sobrenome = "Asa";
         Genero genero = Genero.FEMININO;
         Perfil perfil = Perfil.ALUNO;
+        String senha = "123456";
+        String login = nomeUtilizador;
 
         Escola escola = new Escola("School", "Rua francisco da silva", "9234234445", "school@gmail.com");
 
@@ -67,7 +73,7 @@ public class AlunoDomainTest {
         Turma turma = new Turma("Flor", "4B", 2026, "3º", "Flores verdes", professor);
 
         assertThrows(IllegalArgumentException.class, () -> {
-            new Aluno(primeiroNome, sobrenome, nomeUtilizador, numeroAluno, sala, corFavorita, possuiDaltonismo, genero, escola, perfil, turma);
+            new Aluno(primeiroNome, sobrenome, nomeUtilizador, numeroAluno, sala, corFavorita, possuiDaltonismo, genero, escola, perfil, senha, login, turma);
         });
     }
 
@@ -84,6 +90,8 @@ public class AlunoDomainTest {
         String sobrenome = "";
         Genero genero = Genero.FEMININO;
         Perfil perfil = Perfil.ALUNO;
+        String senha = "123456";
+        String login = nomeUtilizador;
 
         Escola escola = new Escola("School", "Rua francisco da silva", "9234234445", "school@gmail.com");
 
@@ -92,7 +100,7 @@ public class AlunoDomainTest {
         Turma turma = new Turma("Flor", "4B", 2026, "3º", "Flores verdes", professor);
 
         assertThrows(IllegalArgumentException.class, () -> {
-            new Aluno(primeiroNome, sobrenome, nomeUtilizador, numeroAluno, sala, corFavorita, possuiDaltonismo, genero, escola, perfil, turma);
+            new Aluno(primeiroNome, sobrenome, nomeUtilizador, numeroAluno, sala, corFavorita, possuiDaltonismo, genero, escola, perfil, senha, login, turma);
         });
     }
 
@@ -109,6 +117,8 @@ public class AlunoDomainTest {
         String sobrenome = "Asa";
         Genero genero = Genero.FEMININO;
         Perfil perfil = Perfil.ALUNO;
+        String senha = "123456";
+        String login = nomeUtilizador;
 
         Escola escola = new Escola("School", "Rua francisco da silva", "9234234445", "school@gmail.com");
 
@@ -117,7 +127,7 @@ public class AlunoDomainTest {
         Turma turma = new Turma("Flor", "4B", 2026, "3º", "Flores verdes", professor);
 
         assertThrows(IllegalArgumentException.class, () -> {
-            new Aluno(primeiroNome, sobrenome, nomeUtilizador, numeroAluno, sala, corFavorita, possuiDaltonismo, genero, escola, perfil, turma);
+            new Aluno(primeiroNome, sobrenome, nomeUtilizador, numeroAluno, sala, corFavorita, possuiDaltonismo, genero, escola, perfil, senha, login, turma);
         });
 
     }
@@ -135,6 +145,8 @@ public class AlunoDomainTest {
         String sobrenome = "Asa";
         Genero genero = Genero.FEMININO;
         Perfil perfil = Perfil.ALUNO;
+        String senha = "123456";
+        String login = nomeUtilizador;
 
         Escola escola = new Escola("School", "Rua francisco da silva", "9234234445", "school@gmail.com");
 
@@ -143,7 +155,7 @@ public class AlunoDomainTest {
         Turma turma = new Turma("Flor", "4B", 2026, "3º", "Flores verdes", professor);
 
         assertThrows(IllegalArgumentException.class, () -> {
-            new Aluno(primeiroNome, sobrenome, nomeUtilizador, numeroAluno, sala, corFavorita, possuiDaltonismo, genero, escola, perfil, turma);
+            new Aluno(primeiroNome, sobrenome, nomeUtilizador, numeroAluno, sala, corFavorita, possuiDaltonismo, genero, escola, perfil, senha, login, turma);
         });
     }
 
@@ -160,6 +172,8 @@ public class AlunoDomainTest {
         String sobrenome = "Asa";
         Genero genero = Genero.FEMININO;
         Perfil perfil = Perfil.ALUNO;
+        String senha = "123456";
+        String login = nomeUtilizador;
 
         Escola escola = new Escola("School", "Rua francisco da silva", "9234234445", "school@gmail.com");
 
@@ -168,7 +182,7 @@ public class AlunoDomainTest {
         Turma turma = new Turma("Flor", "4B", 2026, "3º", "Flores verdes", professor);
 
         assertThrows(IllegalArgumentException.class, () -> {
-            new Aluno(primeiroNome, sobrenome, nomeUtilizador, numeroAluno, sala, corFavorita, possuiDaltonismo, genero, escola, perfil, turma);
+            new Aluno(primeiroNome, sobrenome, nomeUtilizador, numeroAluno, sala, corFavorita, possuiDaltonismo, genero, escola, perfil, senha, login, turma);
         });
     }
 }

@@ -44,7 +44,7 @@ public class Aluno extends Utilizador {
 
     }
 
-    public Aluno(String primeiroNome, String sobrenome, String nomeUtilizador, int numeroAluno, String sala, String corFavorita, Boolean possuiDaltonismo, Genero genero, Escola escola, Perfil perfil, Turma turma) {
+    public Aluno(String primeiroNome, String sobrenome, String nomeUtilizador, int numeroAluno, String sala, String corFavorita, Boolean possuiDaltonismo, Genero genero, Escola escola, Perfil perfil, String senha, String login, Turma turma) {
 
         if(primeiroNome == null || primeiroNome.isBlank()){
             throw new IllegalArgumentException("O primeiro nome não pode ser vázio");
@@ -68,9 +68,10 @@ public class Aluno extends Utilizador {
         this.setGenero(genero);
         this.setEscola(escola); //escola - variavel ou parametro
         this.setPerfil(Perfil.ALUNO); //Perfil - enum
+        this.setSenha(senha);
+        this.setLogin(nomeUtilizador);
         this.turma = turma;
 
     }
-
 
 }

@@ -23,11 +23,6 @@ public class UtilizadorProfissional extends Utilizador{
     @Column(length = 25, nullable = false)
     private String email;
 
-    @NotEmpty
-    @Column(length = 15, nullable = false)
-    @Size(min = 8, max = 30)
-    private String senha;
-
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private TipoProfissional tipo;
@@ -36,9 +31,9 @@ public class UtilizadorProfissional extends Utilizador{
 
     }
 
-    public UtilizadorProfissional(String primeiroNome, String sobrenome, String telefone, Genero genero, String email, String senha, TipoProfissional tipo, Perfil perfil, Escola escola){
+    public UtilizadorProfissional(String primeiroNome, String sobrenome, String telefone, Genero genero, String email, String senha, String login, TipoProfissional tipo, Perfil perfil, Escola escola){
 
-        this.senha = senha;
+        this.setSenha(senha);
 
         if(primeiroNome == null || primeiroNome.isBlank()){
             throw new IllegalArgumentException("O campo primeiro nome não pode estar vazio.");
@@ -69,6 +64,7 @@ public class UtilizadorProfissional extends Utilizador{
         this.telefone = telefone;
         this.setGenero(genero);
         this.email = email;
+        this.setLogin(email);
         this.tipo = tipo;
         this.setPerfil(perfil);
         this.setEscola(escola);
@@ -76,7 +72,7 @@ public class UtilizadorProfissional extends Utilizador{
 
     private boolean temMaiuscula(){
 
-        for(char c : this.senha.toCharArray()){
+        for(char c : getSenha().toCharArray()){
             if(Character.isUpperCase(c)){
                 return true;
             }
@@ -87,7 +83,7 @@ public class UtilizadorProfissional extends Utilizador{
 
     private boolean temMinuscula(){
 
-        for(char c : senha.toCharArray()){
+        for(char c : this.getSenha().toCharArray()){
             if(Character.isLowerCase(c)){
                 return true;
             }
@@ -97,7 +93,7 @@ public class UtilizadorProfissional extends Utilizador{
 
     private boolean temNumero(){
 
-        for(char c : senha.toCharArray()){
+        for(char c : getSenha().toCharArray()){
             if(Character.isDigit(c)){
                 return true;
             }
@@ -107,7 +103,7 @@ public class UtilizadorProfissional extends Utilizador{
 
     private boolean temCaracterEspecial(){
         String especiais = "@#$%!";
-        for(char c : senha.toCharArray()){
+        for(char c : this.getSenha().toCharArray()){
             if(especiais.indexOf(c) >= 0){
                 return true;
             }
