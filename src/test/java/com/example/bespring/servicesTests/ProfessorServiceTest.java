@@ -9,6 +9,7 @@ import com.example.bespring.dto.AtualizarProfessorRequest;
 import com.example.bespring.dto.CriarProfessorRequest;
 import com.example.bespring.repository.EscolaRepository;
 import com.example.bespring.repository.ProfessorRepository;
+import com.example.bespring.repository.UtilizadorRepository;
 import com.example.bespring.services.ProfessorService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -17,6 +18,9 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 
@@ -38,6 +42,11 @@ public class ProfessorServiceTest {
 
     @Mock
     private EscolaRepository escolaRepository;
+
+    @Mock
+    private UtilizadorRepository utilizadorRepository;
+
+    private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     //Subclass
     @Nested
@@ -96,7 +105,7 @@ public class ProfessorServiceTest {
             assertEquals(professor.getSobrenome(), result.getSobrenome());
             assertEquals(professor.getEmail(), result.getEmail());
             assertEquals(professor.getTelefone(), result.getTelefone());
-            assertEquals(professor.getSenha(), result.getSenha());
+            assertTrue(passwordEncoder.matches(professor.getSenha(), result.getSenha()));
             assertEquals(professor.getTipo(), result.getTipo());
             assertEquals(professor.getGenero(), result.getGenero());
             assertEquals(professor.getPerfil(), result.getPerfil());
@@ -202,6 +211,7 @@ public class ProfessorServiceTest {
             professor.setTelefone("123456789");
             professor.setSenha("@MarEMar2000");
             professor.setGenero(Genero.MASCULINO);
+            String userLogado = professor.getEmail();
 
             long id = 1L;
 
@@ -218,7 +228,7 @@ public class ProfessorServiceTest {
 
             when(professorRepository.save(any(Professor.class))).thenReturn(professor);
 
-            professorService.atualizarProfessor(id, professorRequest);
+            professorService.atualizarProfessor(id, professorRequest, userLogado);
 
             verify(professorRepository).findById(id);
             verify(professorRepository).save(professor);
