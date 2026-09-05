@@ -6,7 +6,9 @@ import com.example.bespring.dto.AtualizarProfessorRequest;
 import com.example.bespring.dto.CriarProfessorRequest;
 import com.example.bespring.repository.EscolaRepository;
 import com.example.bespring.repository.ProfessorRepository;
+import com.example.bespring.repository.UtilizadorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,17 +19,28 @@ public class ProfessorService {
 
     private final ProfessorRepository professorRepository;
     private final EscolaRepository escolaRepository;
+    private final UtilizadorRepository utilizadorRepository;
 
-    public ProfessorService(ProfessorRepository professorRepository, EscolaRepository escolaRepository) {
+    public ProfessorService(ProfessorRepository professorRepository, EscolaRepository escolaRepository, UtilizadorRepository utilizadorRepository) {
 
         this.professorRepository = professorRepository;
         this.escolaRepository = escolaRepository;
+        this.utilizadorRepository = utilizadorRepository;
+
     }
 
-    public Professor cadastrarProfessor(CriarProfessorRequest criarProfessorRequest){
+
+    public Professor cadastrarProfessor(CriarProfessorRequest criarProfessorRequest) {
+
+        //Verificar se o utilizador já existe no banco de dados.
+        if (utilizadorRepository.findByLogin(criarProfessorRequest.email()) != null){
+            throw new RuntimeException("Já existe um utilizador com esse e-mail");
+        }
 
         Escola escola = escolaRepository.findById(criarProfessorRequest.idEscola())
                 .orElseThrow(() -> new RuntimeException("Escola não encontrado"));
+
+        String encryptoPassword = new BCryptPasswordEncoder().encode(criarProfessorRequest.senha());
 
         //Converte DTO para ENTITY
         Professor  entityProfessor = new Professor(
@@ -36,7 +49,7 @@ public class ProfessorService {
                 criarProfessorRequest.telefone(),
                 criarProfessorRequest.genero(),
                 criarProfessorRequest.email(),
-                criarProfessorRequest.senha(),
+                encryptoPassword,
                 criarProfessorRequest.tipo(),
                 criarProfessorRequest.perfil(),
                 escola
@@ -60,12 +73,17 @@ public class ProfessorService {
     }
 
 
-    public void atualizarProfessor(Long id, AtualizarProfessorRequest atualizarProfessorRequest){
+    public void atualizarProfessor(Long id, AtualizarProfessorRequest atualizarProfessorRequest, String usernameLogado){
 
         var professorExiste = professorRepository.findById(id);
 
         if(professorExiste.isPresent()){
+            //Professor encontrado
             var professor = professorExiste.get();
+
+            if(!professor.getEmail().equals(usernameLogado)){
+                throw new RuntimeException("Não poder atualizar este professor");
+            }
 
             if(atualizarProfessorRequest.primeiroNome() != null ){
                 professor.setPrimeiroNome(atualizarProfessorRequest.primeiroNome());
