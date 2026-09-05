@@ -9,10 +9,12 @@ import com.example.bespring.dto.AtualizarProfessorRequest;
 import com.example.bespring.dto.CriarProfessorRequest;
 import com.example.bespring.dto.CriarProfessorResponse;
 import com.example.bespring.services.ProfessorService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -30,7 +32,7 @@ public class ProfessorController {
     }
 
     @PostMapping()
-    public ResponseEntity<CriarProfessorResponse> cadastrarProfessor(@RequestBody CriarProfessorRequest criarProfessorRequest) {
+    public ResponseEntity<CriarProfessorResponse> cadastrarProfessor(@RequestBody @Valid CriarProfessorRequest criarProfessorRequest) {
 
         Professor professor = professorService.cadastrarProfessor(criarProfessorRequest);
 
@@ -92,8 +94,13 @@ public class ProfessorController {
 
     @PutMapping("/{idUtilizador}")
     public ResponseEntity<Void> atualizarProfessor(@PathVariable Long idUtilizador,
-                                                   @RequestBody AtualizarProfessorRequest atualizarProfessorRequest) {
-         professorService.atualizarProfessor(idUtilizador, atualizarProfessorRequest);
+                                                   @RequestBody AtualizarProfessorRequest atualizarProfessorRequest,
+                                                   Authentication authentication) {
+        System.out.println("Authentication " + authentication);
+        //Pegar o professor que se encontra autenticado.
+        String userLogado = authentication.getName();
+
+         professorService.atualizarProfessor(idUtilizador, atualizarProfessorRequest, userLogado);
 
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
