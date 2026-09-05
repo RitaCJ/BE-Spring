@@ -1,4 +1,4 @@
 package com.example.bespring.dto;
 
-public class LoginResponse {
+public record LoginResponse(String token) {
 }
