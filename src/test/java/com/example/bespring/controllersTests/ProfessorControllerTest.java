@@ -9,6 +9,8 @@ import com.example.bespring.domain.enums.TipoProfissional;
 import com.example.bespring.dto.AtualizarProfessorRequest;
 import com.example.bespring.dto.CriarProfessorRequest;
 import com.example.bespring.dto.CriarProfessorResponse;
+import com.example.bespring.repository.UtilizadorRepository;
+import com.example.bespring.security.TokenService;
 import com.example.bespring.services.ProfessorService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ import org.springframework.boot.test.autoconfigure.json.AutoConfigureJson;
 import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import tools.jackson.databind.ObjectMapper;
@@ -24,6 +27,8 @@ import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
+
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -47,6 +52,16 @@ public class ProfessorControllerTest {
     //O ObjectMapper faz a conversão de um objecto Java para JSON ou de JSON para Java.
     @Autowired
     private ObjectMapper objectMapper;
+
+    @MockitoBean
+    private UtilizadorRepository utilizadorRepository;
+
+    @MockitoBean
+    private UserDetailsService userDetailsService;
+
+    @MockitoBean
+    private TokenService tokenService;
+
 
 
     @Test
@@ -205,6 +220,7 @@ public class ProfessorControllerTest {
         professor.setTelefone("123456769");
         professor.setSenha("@MarEMar2007");
         professor.setGenero(Genero.MASCULINO);
+        String userLogado = professor.getEmail();
 
         long id = 1L;
 
@@ -217,17 +233,18 @@ public class ProfessorControllerTest {
                 professor.getSenha()
         );
 
-        doNothing().when(professorService).atualizarProfessor(id, professorRequest);
+        doNothing().when(professorService).atualizarProfessor(id, professorRequest, userLogado);
 
         String json = objectMapper.writeValueAsString(professorRequest);
 
         mockMvc.perform(put("/api/professores/{idUtilizador}", id)
+                        .with(user("here"))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(json))
 
                 .andExpect(status().isNoContent());
 
-                verify(professorService).atualizarProfessor(id, professorRequest);
+                verify(professorService).atualizarProfessor(id, professorRequest, userLogado);
 
     }
 
