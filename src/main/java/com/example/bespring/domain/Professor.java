@@ -46,6 +46,7 @@ public class Professor extends UtilizadorProfissional{
         this.setGenero(genero);
         this.setEmail(email);
         this.setSenha(senha);
+        this.setLogin(email);
         this.setTipo(tipo);
         this.setPerfil(perfil);
         this.setEscola(escola);

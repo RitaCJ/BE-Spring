@@ -31,7 +31,7 @@ public class UtilizadorProfissional extends Utilizador{
 
     }
 
-    public UtilizadorProfissional(String primeiroNome, String sobrenome, String telefone, Genero genero, String email, String senha, String login, TipoProfissional tipo, Perfil perfil, Escola escola){
+    public UtilizadorProfissional(String primeiroNome, String sobrenome, String telefone, Genero genero, String email, String senha, TipoProfissional tipo, Perfil perfil, Escola escola){
 
         this.setSenha(senha);
 
@@ -64,9 +64,9 @@ public class UtilizadorProfissional extends Utilizador{
         this.telefone = telefone;
         this.setGenero(genero);
         this.email = email;
-        this.setLogin(email);
         this.tipo = tipo;
         this.setPerfil(perfil);
+        this.setLogin(email);
         this.setEscola(escola);
     }
 

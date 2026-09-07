@@ -44,7 +44,7 @@ public class Aluno extends Utilizador {
 
     }
 
-    public Aluno(String primeiroNome, String sobrenome, String nomeUtilizador, int numeroAluno, String sala, String corFavorita, Boolean possuiDaltonismo, Genero genero, Escola escola, Perfil perfil, String senha, String login, Turma turma) {
+    public Aluno(String primeiroNome, String sobrenome, String nomeUtilizador, int numeroAluno, String sala, String corFavorita, Boolean possuiDaltonismo, Genero genero, Escola escola, Perfil perfil, String senha, Turma turma) {
 
         if(primeiroNome == null || primeiroNome.isBlank()){
             throw new IllegalArgumentException("O primeiro nome não pode ser vázio");
