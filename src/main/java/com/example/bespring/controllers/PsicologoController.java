@@ -10,6 +10,8 @@ import jakarta.validation.Valid;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -40,6 +42,32 @@ public class PsicologoController {
         );
 
         return ResponseEntity.status(HttpStatus.CREATED).body(psicologoResponse);
+
+    }
+
+    @GetMapping("/{idUtilizador}")
+    public ResponseEntity<CriarPsicologoResponse> buscarPsicologo(@PathVariable Long idUtilizador,
+                                                                  Authentication authentication){
+
+        Authentication auth = authentication;
+
+        String userLogado = auth.getName();
+
+        Psicologo psicologo = psicologoService.procurarPsicologoPeloId(idUtilizador, userLogado);
+
+        CriarPsicologoResponse psicologoResponse = new CriarPsicologoResponse(
+                psicologo.getIdUtilizador(),
+                psicologo.getPrimeiroNome(),
+                psicologo.getSobrenome(),
+                psicologo.getTelefone(),
+                psicologo.getGenero(),
+                psicologo.getEmail(),
+                psicologo.getTipo(),
+                psicologo.getPerfil(),
+                psicologo.getEscola().getIdEscola()
+        );
+
+        return ResponseEntity.status(HttpStatus.OK).body(psicologoResponse);
 
     }
 }
