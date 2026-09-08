@@ -92,7 +92,6 @@ public class ProfessorControllerTest {
                 professor.getEmail(),
                 professor.getSenha(),
                 professor.getTipo(),
-                professor.getPerfil(),
                 professor.getEscola().getIdEscola()
         );
 
@@ -136,16 +135,18 @@ public class ProfessorControllerTest {
         professor.setIdUtilizador(1L);
         long id = 1L;
 
+        String utilizadorLogado = professor.getEmail();
+
         professor.setEscola(escola);
 
-        when(professorService.procurarProfessorPorId(id)).thenReturn(professor);
+        when(professorService.procurarProfessorPorId(id, utilizadorLogado)).thenReturn(professor);
 
         mockMvc.perform(get("/api/professores/{idUtilizador}", id))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.idUtilizador").value(1L))
                 .andExpect(jsonPath("$.idEscola").value(escola.getIdEscola()));
 
-        verify(professorService).procurarProfessorPorId(id);
+        verify(professorService).procurarProfessorPorId(id, utilizadorLogado);
 
     }
 
