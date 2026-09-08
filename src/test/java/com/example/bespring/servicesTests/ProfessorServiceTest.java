@@ -65,7 +65,7 @@ public class ProfessorServiceTest {
             professor.setSenha("@MarEMar2000");
             professor.setTipo(TipoProfissional.PROFESSOR);
             professor.setGenero(Genero.MASCULINO);
-            professor.setPerfil(Perfil.PROFESSOR);
+
 
             Escola escola = new Escola("School", "Rua francisco da silva", "9234234445", "school@gmail.com");
             escola.setIdEscola(1L);
@@ -91,7 +91,6 @@ public class ProfessorServiceTest {
                     professor.getEmail(),
                     professor.getSenha(),
                     professor.getTipo(),
-                    professor.getPerfil(),
                     professor.getEscola().getIdEscola()
             );
 
@@ -108,7 +107,6 @@ public class ProfessorServiceTest {
             assertTrue(passwordEncoder.matches(professor.getSenha(), result.getSenha()));
             assertEquals(professor.getTipo(), result.getTipo());
             assertEquals(professor.getGenero(), result.getGenero());
-            assertEquals(professor.getPerfil(), result.getPerfil());
             assertEquals(1L, result.getEscola().getIdEscola());
 
             //Verificar se procurou pela escola.
@@ -130,13 +128,16 @@ public class ProfessorServiceTest {
 
             Professor professor = new Professor();
             professor.setIdUtilizador(1L);
+            professor.setEmail("asa@gmail.com");
             long id = 1L;
 
             //Arrange - Preparar
             when(professorRepository.findById(id)).thenReturn(Optional.of(professor));
 
+            String utilizadorLogado = professor.getEmail();
+
             //Act - Executar
-            var result = professorService.procurarProfessorPorId(id);
+            var result = professorService.procurarProfessorPorId(id, utilizadorLogado);
 
             //Assert - Verificar resultado
             assertNotNull(result);
