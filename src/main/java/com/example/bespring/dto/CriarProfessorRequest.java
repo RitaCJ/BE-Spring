@@ -18,6 +18,5 @@ public record CriarProfessorRequest(
         String email,
         String senha,
         TipoProfissional tipo,
-        Perfil perfil,
         Long idEscola
 ) { }
