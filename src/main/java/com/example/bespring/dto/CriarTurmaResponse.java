@@ -1,4 +1,14 @@
 package com.example.bespring.dto;
 
-public record CriarTurmaResponse() {
-}
+import java.util.List;
+
+public record CriarTurmaResponse(
+        long idTurma,
+        String nome,
+        String sala,
+        int anoLetivo,
+        String anoSerie,
+        String descricao,
+        List<Long> idAlunos,
+        long idProfessor
+) { }
