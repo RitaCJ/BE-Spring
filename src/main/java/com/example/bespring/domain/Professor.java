@@ -22,6 +22,9 @@ public class Professor extends UtilizadorProfissional{
     @OneToMany(mappedBy = "professor")
     private List<Turma> turmas;
 
+    @OneToMany(mappedBy = "professor")
+    private List<Aluno> alunos;
+
     public Professor() {
 
     }
@@ -48,7 +51,7 @@ public class Professor extends UtilizadorProfissional{
         this.setSenha(senha);
         this.setLogin(email);
         this.setTipo(tipo);
-        this.setPerfil(perfil);
+        this.setPerfil(Perfil.PROFESSOR);
         this.setEscola(escola);
     }
 }
