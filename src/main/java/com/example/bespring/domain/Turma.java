@@ -26,7 +26,7 @@ public class Turma {
     @Column(length = 5, nullable = false)
     private String sala;
 
-    @NotEmpty
+
     @Min(2000)
     @Max(2100)
     private int anoLetivo;
@@ -43,7 +43,6 @@ public class Turma {
     @OneToMany(mappedBy = "turma")
     private List<Aluno> alunos;
 
-    @NotEmpty
     @ManyToOne
     @JoinColumn(name = "professor_id", nullable = false)
     private Professor professor;
