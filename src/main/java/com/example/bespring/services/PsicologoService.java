@@ -2,6 +2,7 @@ package com.example.bespring.services;
 
 import com.example.bespring.domain.Escola;
 import com.example.bespring.domain.Psicologo;
+import com.example.bespring.domain.enums.Perfil;
 import com.example.bespring.dto.CriarPsicologoRequest;
 import com.example.bespring.repository.EscolaRepository;
 import com.example.bespring.repository.PsicologoRepository;
@@ -35,6 +36,8 @@ public class PsicologoService {
         //Criptografar a senha
         String passwordEncrypto  = new BCryptPasswordEncoder().encode(psicologoRequest.senha());
 
+        Perfil perfil = Perfil.PSICOLOGO;
+
         //Converter de DTO para Entity
         Psicologo psicologoEntity = new Psicologo(
                 psicologoRequest.primeiroNome(),
@@ -44,12 +47,31 @@ public class PsicologoService {
                 psicologoRequest.email(),
                 passwordEncrypto,
                 psicologoRequest.tipo(),
-                psicologoRequest.perfil(),
+                perfil,
                 escola
         );
 
         return psicologoRepository.save(psicologoEntity);
 
+    }
+
+    public Psicologo procurarPsicologoPeloId(Long id, String utilizadorLogado){
+
+        var psicologoExiste = psicologoRepository.findById(id);
+
+        if(psicologoExiste.isPresent()){
+
+            var psicologo1 = psicologoExiste.get();
+
+            if(!psicologo1.getEmail().equals(utilizadorLogado)){
+                throw new RuntimeException("Não pode procurar por este utilizador");
+            }
+
+            return psicologo1;
+
+        }else{
+            throw new RuntimeException("Psicologo não encontrado com o id " + id);
+        }
     }
 
 }
