@@ -21,13 +21,13 @@ public class UtilizadorProfissionalDomainTest {
         Genero genero = Genero.FEMININO;
         String email = "ana@gmail.com";
         String senha = "Feliznatal2026%";
-        String login = email;
+
         TipoProfissional tipo = TipoProfissional.PROFESSOR;
         Perfil perfil = Perfil.PROFESSOR;
 
         Escola escola = new Escola("School", "Rua francisco da silva", "9234234445", "school@gmail.com");
 
-        UtilizadorProfissional userProf = new UtilizadorProfissional(primeiroNome, sobrenome, telefone, genero, email, senha, login, tipo, perfil, escola);
+        UtilizadorProfissional userProf = new UtilizadorProfissional(primeiroNome, sobrenome, telefone, genero, email, senha, tipo, perfil, escola);
 
         assertEquals(primeiroNome, userProf.getPrimeiroNome());
         assertEquals(sobrenome, userProf.getSobrenome());
@@ -35,7 +35,6 @@ public class UtilizadorProfissionalDomainTest {
         assertEquals(genero, userProf.getGenero());
         assertEquals(email, userProf.getEmail());
         assertEquals(senha, userProf.getSenha());
-        assertEquals(login, userProf.getLogin());
         assertEquals(tipo, userProf.getTipo());
         assertEquals(perfil, userProf.getPerfil());
         assertEquals(escola, userProf.getEscola());
@@ -53,12 +52,11 @@ public class UtilizadorProfissionalDomainTest {
         String senha = "123456";
         TipoProfissional tipo = TipoProfissional.PROFESSOR;
         Perfil perfil = Perfil.ALUNO;
-        String login = email;
 
         Escola escola = new Escola("School", "Rua francisco da silva", "9234234445", "school@gmail.com");
 
         assertThrows(IllegalArgumentException.class, () -> {
-            new UtilizadorProfissional(primeiroNome, sobrenome, telefone, genero, email, senha, login, tipo, perfil, escola);
+            new UtilizadorProfissional(primeiroNome, sobrenome, telefone, genero, email, senha, tipo, perfil, escola);
         });
 
     }
@@ -73,12 +71,11 @@ public class UtilizadorProfissionalDomainTest {
         String senha = "123456";
         TipoProfissional tipo = TipoProfissional.PROFESSOR;
         Perfil perfil = Perfil.ALUNO;
-        String login = email;
 
         Escola escola = new Escola("School", "Rua francisco da silva", "9234234445", "school@gmail.com");
 
         assertThrows(IllegalArgumentException.class, () -> {
-            new UtilizadorProfissional(primeiroNome, sobrenome, telefone, genero, email, senha, login, tipo, perfil, escola);
+            new UtilizadorProfissional(primeiroNome, sobrenome, telefone, genero, email, senha, tipo, perfil, escola);
         });
     }
 
@@ -92,12 +89,11 @@ public class UtilizadorProfissionalDomainTest {
         String senha = "123456";
         TipoProfissional tipo = TipoProfissional.PROFESSOR;
         Perfil perfil = Perfil.ALUNO;
-        String login = email;
 
         Escola escola = new Escola("School", "Rua francisco da silva", "9234234445", "school@gmail.com");
 
         assertThrows(IllegalArgumentException.class, () -> {
-            new UtilizadorProfissional(primeiroNome, sobrenome, telefone, genero, email, senha, login, tipo, perfil, escola);
+            new UtilizadorProfissional(primeiroNome, sobrenome, telefone, genero, email, senha, tipo, perfil, escola);
         });
     }
 
@@ -112,12 +108,11 @@ public class UtilizadorProfissionalDomainTest {
         String senha = "123456";
         TipoProfissional tipo = TipoProfissional.PROFESSOR;
         Perfil perfil = Perfil.ALUNO;
-        String login = email;
 
         Escola escola = new Escola("School", "Rua francisco da silva", "9234234445", "school@gmail.com");
 
         assertThrows(IllegalArgumentException.class, () -> {
-            new UtilizadorProfissional(primeiroNome, sobrenome, telefone, genero, email, senha, login, tipo, perfil, escola);
+            new UtilizadorProfissional(primeiroNome, sobrenome, telefone, genero, email, senha, tipo, perfil, escola);
         });
     }
 
@@ -131,12 +126,11 @@ public class UtilizadorProfissionalDomainTest {
         String senha = "";
         TipoProfissional tipo = TipoProfissional.PROFESSOR;
         Perfil perfil = Perfil.ALUNO;
-        String login = email;
 
         Escola escola = new Escola("School", "Rua francisco da silva", "9234234445", "school@gmail.com");
 
         assertThrows(IllegalArgumentException.class, () -> {
-            new UtilizadorProfissional(primeiroNome, sobrenome, telefone, genero, email, senha, login, tipo, perfil, escola);
+            new UtilizadorProfissional(primeiroNome, sobrenome, telefone, genero, email, senha, tipo, perfil, escola);
         });
     }
 
@@ -151,12 +145,11 @@ public class UtilizadorProfissionalDomainTest {
         String senha = "asdf354";
         TipoProfissional tipo = TipoProfissional.PROFESSOR;
         Perfil perfil = Perfil.ALUNO;
-        String login = email;
 
         Escola escola = new Escola("School", "Rua francisco da silva", "9234234445", "school@gmail.com");
 
         assertThrows(IllegalArgumentException.class, () -> {
-            new UtilizadorProfissional(primeiroNome, sobrenome, telefone, genero, email, senha, login, tipo, perfil, escola);
+            new UtilizadorProfissional(primeiroNome, sobrenome, telefone, genero, email, senha, tipo, perfil, escola);
         });
     }
 
@@ -171,12 +164,11 @@ public class UtilizadorProfissionalDomainTest {
         String senha = "asdf3523kkkdjjdfsdfghfghfvfgdff";
         TipoProfissional tipo = TipoProfissional.PROFESSOR;
         Perfil perfil = Perfil.ALUNO;
-        String login = email;
 
         Escola escola = new Escola("School", "Rua francisco da silva", "9234234445", "school@gmail.com");
 
         assertThrows(IllegalArgumentException.class, () -> {
-            new UtilizadorProfissional(primeiroNome, sobrenome, telefone, genero, email, senha, login, tipo, perfil, escola);
+            new UtilizadorProfissional(primeiroNome, sobrenome, telefone, genero, email, senha, tipo, perfil, escola);
         });
 
     }
@@ -192,12 +184,11 @@ public class UtilizadorProfissionalDomainTest {
         String senha = "avante";
         TipoProfissional tipo = TipoProfissional.PROFESSOR;
         Perfil perfil = Perfil.ALUNO;
-        String login = email;
 
         Escola escola = new Escola("School", "Rua francisco da silva", "9234234445", "school@gmail.com");
 
         assertThrows(IllegalArgumentException.class, () -> {
-            new UtilizadorProfissional(primeiroNome, sobrenome, telefone, genero, email, senha, login, tipo, perfil, escola);
+            new UtilizadorProfissional(primeiroNome, sobrenome, telefone, genero, email, senha, tipo, perfil, escola);
         });
     }
 
@@ -211,12 +202,11 @@ public class UtilizadorProfissionalDomainTest {
         String senha = "AVANTE";
         TipoProfissional tipo = TipoProfissional.PROFESSOR;
         Perfil perfil = Perfil.ALUNO;
-        String login = email;
 
         Escola escola = new Escola("School", "Rua francisco da silva", "9234234445", "school@gmail.com");
 
         assertThrows(IllegalArgumentException.class, () -> {
-            new UtilizadorProfissional(primeiroNome, sobrenome, telefone, genero, email, senha, login, tipo, perfil, escola);
+            new UtilizadorProfissional(primeiroNome, sobrenome, telefone, genero, email, senha, tipo, perfil, escola);
         });
     }
 
@@ -230,12 +220,11 @@ public class UtilizadorProfissionalDomainTest {
         String senha = "Avante";
         TipoProfissional tipo = TipoProfissional.PROFESSOR;
         Perfil perfil = Perfil.ALUNO;
-        String login = email;
 
         Escola escola = new Escola("School", "Rua francisco da silva", "9234234445", "school@gmail.com");
 
         assertThrows(IllegalArgumentException.class, () -> {
-            new UtilizadorProfissional(primeiroNome, sobrenome, telefone, genero, email, senha, login, tipo, perfil, escola);
+            new UtilizadorProfissional(primeiroNome, sobrenome, telefone, genero, email, senha, tipo, perfil, escola);
         });
     }
 
@@ -249,12 +238,11 @@ public class UtilizadorProfissionalDomainTest {
         String senha = "@Avante";
         TipoProfissional tipo = TipoProfissional.PROFESSOR;
         Perfil perfil = Perfil.ALUNO;
-        String login = email;
 
         Escola escola = new Escola("School", "Rua francisco da silva", "9234234445", "school@gmail.com");
 
         assertThrows(IllegalArgumentException.class, () -> {
-            new UtilizadorProfissional(primeiroNome, sobrenome, telefone, genero, email, senha, login, tipo, perfil, escola);
+            new UtilizadorProfissional(primeiroNome, sobrenome, telefone, genero, email, senha, tipo, perfil, escola);
         });
 
     }
