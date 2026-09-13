@@ -7,6 +7,8 @@ import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Optional;
+
 @Entity
 @Getter
 @Setter
@@ -19,7 +21,7 @@ public class Aluno extends Utilizador {
     @Column(length = 15, nullable = false)
     private String nomeUtilizador;
 
-    @NotEmpty
+    //@NotEmpty
     @Column(nullable = false)
     private int numeroAluno;
 
@@ -31,20 +33,23 @@ public class Aluno extends Utilizador {
     @Column(length = 20, nullable = false)
     private String corFavorita;
 
-    @NotEmpty
     @Column(nullable = false)
     private boolean possuiDaltonismo;
 
-    @NotEmpty
-    @ManyToOne
-    @JoinColumn(name = "id_turma", nullable = true)//Aluno não é obrigado a estar associado a uma turma.
+    @ManyToOne(optional = true)
+    @JoinColumn(name = "turma_id", nullable = true)//Aluno não é obrigado a estar associado a uma turma.
     private Turma turma;
+
+    @ManyToOne
+    @JoinColumn(name = "professor_id", nullable = false)
+    private Professor professor;
+
 
     public Aluno() {
 
     }
 
-    public Aluno(String primeiroNome, String sobrenome, String nomeUtilizador, int numeroAluno, String sala, String corFavorita, Boolean possuiDaltonismo, Genero genero, Escola escola, Perfil perfil, String senha, Turma turma) {
+    public Aluno(String primeiroNome, String sobrenome, String nomeUtilizador, int numeroAluno, String sala, String corFavorita, boolean possuiDaltonismo, Genero genero, Escola escola, Perfil perfil, String senha, Turma turma, Professor professor) {
 
         if(primeiroNome == null || primeiroNome.isBlank()){
             throw new IllegalArgumentException("O primeiro nome não pode ser vázio");
@@ -70,7 +75,8 @@ public class Aluno extends Utilizador {
         this.setPerfil(Perfil.ALUNO); //Perfil - enum
         this.setSenha(senha);
         this.setLogin(nomeUtilizador);
-        this.turma = turma;
+        this.turma = null;
+        this.professor = professor;
 
     }
 
