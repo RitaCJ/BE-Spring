@@ -52,11 +52,16 @@ public class ProfessorController {
         return ResponseEntity.status(HttpStatus.CREATED).body(professorResponse);
     }
 
-    @PreAuthorize("#idUtilizador == authentication.principal.id")
+   // @PreAuthorize("#idUtilizador == authentication.principal.id")
     @GetMapping("/{idUtilizador}")
-    public ResponseEntity<CriarProfessorResponse> buscarProfessor(@PathVariable Long idUtilizador) {
+    public ResponseEntity<CriarProfessorResponse> buscarProfessor(@PathVariable Long idUtilizador,
+                                                                  Authentication  authentication) {
 
-        Professor professor = professorService.procurarProfessorPorId(idUtilizador);
+        Authentication auth = authentication;
+
+        String utilizadorLogado = auth.getName();
+
+        Professor professor = professorService.procurarProfessorPorId(idUtilizador, utilizadorLogado);
 
         CriarProfessorResponse professorResponse = new CriarProfessorResponse(
                 professor.getIdUtilizador(),
