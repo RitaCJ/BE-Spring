@@ -19,6 +19,7 @@ import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import tools.jackson.databind.ObjectMapper;
@@ -210,7 +211,9 @@ public class ProfessorControllerTest {
                 verify(professorService).listarProfessores();
     }
 
+
     @Test
+    @WithMockUser(username = "zaburi12@gmail.com", roles = {"PROFESSOR"})
     void deveAtualizarProfessor() throws Exception{
 
         Professor professor = new Professor();
@@ -239,7 +242,6 @@ public class ProfessorControllerTest {
         String json = objectMapper.writeValueAsString(professorRequest);
 
         mockMvc.perform(put("/api/professores/{idUtilizador}", id)
-                        .with(user("here"))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(json))
 
