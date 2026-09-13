@@ -2,6 +2,7 @@ package com.example.bespring.services;
 
 import com.example.bespring.domain.Escola;
 import com.example.bespring.domain.Professor;
+import com.example.bespring.domain.enums.Perfil;
 import com.example.bespring.dto.AtualizarProfessorRequest;
 import com.example.bespring.dto.CriarProfessorRequest;
 import com.example.bespring.repository.EscolaRepository;
@@ -38,9 +39,11 @@ public class ProfessorService {
         }
 
         Escola escola = escolaRepository.findById(criarProfessorRequest.idEscola())
-                .orElseThrow(() -> new RuntimeException("Escola não encontrado"));
+                .orElseThrow(() -> new RuntimeException("Escola não encontrada"));
 
         String encryptoPassword = new BCryptPasswordEncoder().encode(criarProfessorRequest.senha());
+
+        Perfil perfil = Perfil.PROFESSOR;
 
         //Converte DTO para ENTITY
         Professor  entityProfessor = new Professor(
@@ -51,7 +54,7 @@ public class ProfessorService {
                 criarProfessorRequest.email(),
                 encryptoPassword,
                 criarProfessorRequest.tipo(),
-                criarProfessorRequest.perfil(),
+                perfil,
                 escola
         );
 
@@ -59,10 +62,22 @@ public class ProfessorService {
 
     }
 
-    public Professor procurarProfessorPorId(Long id){
+    public Professor procurarProfessorPorId(Long id, String utilizadorLogado){
 
-        return professorRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Professor não encontrado com o id " + id));
+        var professorExistetente = professorRepository.findById(id);
+
+        if(professorExistetente.isPresent()){
+            var professor1 = professorExistetente.get();
+            if(!professor1.getEmail().equals(utilizadorLogado)){
+                throw new RuntimeException("Não pode procurar por este utilizador");
+            }
+
+            return professor1;
+
+        }else{
+
+            throw new RuntimeException("Professor não encontrado com o id " + id);
+        }
 
     }
 
@@ -82,7 +97,7 @@ public class ProfessorService {
             var professor = professorExiste.get();
 
             if(!professor.getEmail().equals(usernameLogado)){
-                throw new RuntimeException("Não poder atualizar este professor");
+                throw new RuntimeException("Não pode atualizar este professor");
             }
 
             if(atualizarProfessorRequest.primeiroNome() != null ){
