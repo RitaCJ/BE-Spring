@@ -33,10 +33,16 @@ public class SecurityConfiguration {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
+
                         .requestMatchers(HttpMethod.POST, "/api/professores").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/psicologos").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/alunos").hasRole("PROFESSOR")
+                        .requestMatchers(HttpMethod.POST, "/api/turmas").hasRole("PROFESSOR")
+
                         .requestMatchers(HttpMethod.PUT, "/api/professores/{idUtilizador}").hasRole("PROFESSOR")
+
                         .requestMatchers(HttpMethod.GET, "/api/professores/{idUtilizador}").hasRole("PROFESSOR")
+                        .requestMatchers(HttpMethod.GET, "/api/psicologos/{idUtilizador}").hasRole("PSICOLOGO")
 
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
