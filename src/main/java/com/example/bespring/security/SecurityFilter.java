@@ -1,6 +1,6 @@
 package com.example.bespring.security;
 
-import com.example.bespring.repository.UtilizadorRepository;
+import com.example.bespring.modulosTest.utilizadoresTest.repository.UtilizadorRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

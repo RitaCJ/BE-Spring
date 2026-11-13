@@ -1,0 +1,21 @@
+services:
+  db:
+    image: mariadb:latest
+    container_name: myMariadb
+    restart: always
+    environment:
+      MARIADB_USER: springUser
+      MARIADB_PASSWORD: user
+      MARIADB_ROOT_PASSWORD: root
+      MARIADB_DATABASE: springdb_myapp
+    ports:
+      - "3306:3306"
+    volumes:
+      - db:/var/lib/mysql
+
+volumes:
+  db:
+
+
+
+
