@@ -30,14 +30,19 @@ public class ProfessorController {
 
         CriarProfessorResponse professorResponse = new CriarProfessorResponse(
                 professor.getIdUtilizador(),
+                professor.getNumeroIdentificacao(),
                 professor.getPrimeiroNome(),
                 professor.getSobrenome(),
                 professor.getTelefone(),
                 professor.getGenero(),
+                professor.getDataNascimento(),
                 professor.getEmail(),
                 professor.getTipo(),
                 professor.getPerfil(),
-                professor.getEscola().getIdEscola()
+                professor.getEscola().getIdEscola(),
+                professor.getEstadoConta(),
+                professor.getCriadoPor(),
+                professor.getAprovadoPor()
         );
 
         return ResponseEntity.status(HttpStatus.CREATED).body(professorResponse);
@@ -56,14 +61,19 @@ public class ProfessorController {
 
         CriarProfessorResponse professorResponse = new CriarProfessorResponse(
                 professor.getIdUtilizador(),
+                professor.getNumeroIdentificacao(),
                 professor.getPrimeiroNome(),
                 professor.getSobrenome(),
                 professor.getTelefone(),
                 professor.getGenero(),
+                professor.getDataNascimento(),
                 professor.getEmail(),
                 professor.getTipo(),
                 professor.getPerfil(),
-                professor.getEscola().getIdEscola()
+                professor.getEscola().getIdEscola(),
+                professor.getEstadoConta(),
+                professor.getCriadoPor(),
+                professor.getAprovadoPor()
         );
 
         return ResponseEntity.status(HttpStatus.OK).body(professorResponse);
@@ -77,14 +87,19 @@ public class ProfessorController {
         List<CriarProfessorResponse> professoresResponse = professores.stream()
                 .map(professor -> new CriarProfessorResponse(
                         professor.getIdUtilizador(),
+                        professor.getNumeroIdentificacao(),
                         professor.getPrimeiroNome(),
                         professor.getSobrenome(),
                         professor.getTelefone(),
                         professor.getGenero(),
+                        professor.getDataNascimento(),
                         professor.getEmail(),
                         professor.getTipo(),
                         professor.getPerfil(),
-                        professor.getEscola().getIdEscola()
+                        professor.getEscola().getIdEscola(),
+                        professor.getEstadoConta(),
+                        professor.getCriadoPor(),
+                        professor.getAprovadoPor()
                 )).toList();
 
         return ResponseEntity.status(HttpStatus.OK).body(professoresResponse);

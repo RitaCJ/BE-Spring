@@ -1,5 +1,6 @@
 package com.example.bespring.modulosTest.utilizadoresTest.domain;
 
+import com.example.bespring.modulosTest.utilizadoresTest.domain.enums.EstadoConta;
 import com.example.bespring.modulosTest.utilizadoresTest.domain.enums.Genero;
 import com.example.bespring.modulosTest.utilizadoresTest.domain.enums.Perfil;
 import com.example.bespring.modulosTest.utilizadoresTest.domain.enums.TipoProfissional;
@@ -7,6 +8,8 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.time.LocalDate;
 
 @Entity
 @Getter
@@ -26,11 +29,21 @@ public class UtilizadorProfissional extends Utilizador{
     @Enumerated(EnumType.STRING)
     private TipoProfissional tipo;
 
+    @NotEmpty
+    @Column(length = 20, nullable = false)
+    private String numeroIdentificacao;
+
+    @ManyToOne(optional = true, fetch = FetchType.LAZY)
+    @JoinColumn(name = "aprovado_por", nullable = true)
+    private Utilizador aprovadoPor;
+
+
     public UtilizadorProfissional(){
 
     }
 
-    public UtilizadorProfissional(String primeiroNome, String sobrenome, String telefone, Genero genero, String email, String senha, TipoProfissional tipo, Perfil perfil, Escola escola){
+    public UtilizadorProfissional(String numeroIdentificacao, String primeiroNome, String sobrenome, String telefone, Genero genero, LocalDate dataNascimento,
+                                  String email, String senha, TipoProfissional tipo, Perfil perfil, Escola escola, EstadoConta estadoConta, Utilizador criadoPor, Utilizador aprovadoPor) {
 
         this.setSenha(senha);
 
@@ -49,24 +62,33 @@ public class UtilizadorProfissional extends Utilizador{
         }else if(senha.length() > 30){
             throw new IllegalArgumentException("A senha é muito longa.");
         }else if(!temMaiuscula()){
-            throw new IllegalArgumentException("A senha não tem letra maíuscula.");
+            throw new IllegalArgumentException("A senha não tem letra maiuscula.");
         }else if(!temMinuscula()){
             throw new IllegalArgumentException("A senha não tem letra minuscula.");
         }else if(!temNumero()){
             throw new IllegalArgumentException("A senha não tem numero.");
         }else if(!temCaracterEspecial()){
             throw new IllegalArgumentException("A senha não tem caractere especial.");
+        }else if(!telefone.matches("[0-9]{9}$")){
+            throw new IllegalArgumentException("O telefone deve conter: 9 dígitos e não pode ter letras");
+        }else if(!numeroIdentificacao.matches("^[a-zA-Z0-9]{1,20}$")){
+            throw new IllegalArgumentException("O numero deve conter: 1 e 20");
         }
 
+        this.numeroIdentificacao = numeroIdentificacao;
         this.setPrimeiroNome(primeiroNome);
         this.setSobrenome(sobrenome);
         this.telefone = telefone;
         this.setGenero(genero);
+        this.setDataNascimento(dataNascimento);
         this.email = email;
         this.tipo = tipo;
         this.setPerfil(perfil);
         this.setLogin(email);
         this.setEscola(escola);
+        this.setEstadoConta(estadoConta);
+        this.setCriadoPor(criadoPor);
+        this.aprovadoPor = aprovadoPor;
     }
 
     private boolean temMaiuscula(){

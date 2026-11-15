@@ -1,9 +1,7 @@
 package com.example.bespring.modulosTest.utilizadoresTest.servicesTests;
 
-import com.example.bespring.modulosTest.utilizadoresTest.domain.Aluno;
-import com.example.bespring.modulosTest.utilizadoresTest.domain.Escola;
-import com.example.bespring.modulosTest.utilizadoresTest.domain.Professor;
-import com.example.bespring.modulosTest.utilizadoresTest.domain.Turma;
+import com.example.bespring.modulosTest.utilizadoresTest.domain.*;
+import com.example.bespring.modulosTest.utilizadoresTest.domain.enums.EstadoConta;
 import com.example.bespring.modulosTest.utilizadoresTest.domain.enums.Genero;
 import com.example.bespring.modulosTest.utilizadoresTest.domain.enums.Perfil;
 import com.example.bespring.modulosTest.utilizadoresTest.domain.enums.TipoProfissional;
@@ -18,6 +16,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -65,10 +64,23 @@ public class TurmaServiceTest {
 
             long idProfessor = 1L;
 
+            Utilizador admin = new Utilizador("Marta", "KingStone", Genero.FEMININO,
+                    LocalDate.of(1999,10,2), Perfil.ADMIN,"raquel@gmail.com", "maura12#",
+                    EstadoConta.ATIVA, null, null);
+            admin.setIdUtilizador(1L);
+
+            Utilizador adminEscola = new Utilizador("Raquel", "KingStone", Genero.FEMININO,
+                    LocalDate.of(2004,1,5), Perfil.ADMIN_ESCOLA,"raquel@gmail.com", "maura1234",
+                    EstadoConta.ATIVA, null, admin);
+            adminEscola.setIdUtilizador(2L);
+
             Escola escola = new Escola("School", "Rua francisco da silva", "9234234445", "school@gmail.com");
             escola.setIdEscola(1L);
 
-            Professor professor = new Professor("Bruna", "Asa", "993838844", Genero.FEMININO, "bruna@gmail.com", "@Bemvindo123", TipoProfissional.PROFESSOR,  Perfil.PROFESSOR, escola);
+            Professor professor = new Professor("92342A3444", "Bruna", "Asa", "993838844", Genero.FEMININO,
+                    LocalDate.of(1999,1,2), "bruna@gmail.com", "@Bemvindo123", TipoProfissional.PROFESSOR,
+                    Perfil.PROFESSOR, escola, EstadoConta.ATIVA, null, adminEscola);
+
             professor.setIdUtilizador(1L);
 
             Aluno aluno1 = new Aluno("Bahati", "Albertina", "AAl01", 12,

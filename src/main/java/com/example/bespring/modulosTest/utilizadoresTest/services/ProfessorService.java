@@ -2,6 +2,7 @@ package com.example.bespring.modulosTest.utilizadoresTest.services;
 
 import com.example.bespring.modulosTest.utilizadoresTest.domain.Escola;
 import com.example.bespring.modulosTest.utilizadoresTest.domain.Professor;
+import com.example.bespring.modulosTest.utilizadoresTest.domain.enums.EstadoConta;
 import com.example.bespring.modulosTest.utilizadoresTest.domain.enums.Perfil;
 import com.example.bespring.modulosTest.utilizadoresTest.dto.AtualizarProfessorRequest;
 import com.example.bespring.modulosTest.utilizadoresTest.dto.CriarProfessorRequest;
@@ -9,6 +10,7 @@ import com.example.bespring.modulosTest.utilizadoresTest.repository.EscolaReposi
 import com.example.bespring.modulosTest.utilizadoresTest.repository.ProfessorRepository;
 import com.example.bespring.modulosTest.utilizadoresTest.repository.UtilizadorRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,7 +30,6 @@ public class ProfessorService {
 
     }
 
-
     public Professor cadastrarProfessor(CriarProfessorRequest criarProfessorRequest) {
 
         //Verificar se o utilizador já existe no banco de dados.
@@ -43,17 +44,24 @@ public class ProfessorService {
 
         Perfil perfil = Perfil.PROFESSOR;
 
+        EstadoConta estadoConta = EstadoConta.PENDENTE;
+
         //Converte DTO para ENTITY
         Professor  entityProfessor = new Professor(
+                criarProfessorRequest.numeroIdentificacao(),
                 criarProfessorRequest.primeiroNome(),
                 criarProfessorRequest.sobrenome(),
                 criarProfessorRequest.telefone(),
                 criarProfessorRequest.genero(),
+                criarProfessorRequest.dataNascimento(),
                 criarProfessorRequest.email(),
                 encryptoPassword,
                 criarProfessorRequest.tipo(),
                 perfil,
-                escola
+                escola,
+                estadoConta,
+                null,
+                null
         );
 
       return professorRepository.save(entityProfessor);
@@ -90,6 +98,8 @@ public class ProfessorService {
 
         var professorExiste = professorRepository.findById(id);
 
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
         if(professorExiste.isPresent()){
             //Professor encontrado
             var professor = professorExiste.get();
@@ -119,7 +129,7 @@ public class ProfessorService {
             }
 
             if(atualizarProfessorRequest.senha() != null ){
-                professor.setSenha(atualizarProfessorRequest.senha());
+                professor.setSenha(passwordEncoder.encode(atualizarProfessorRequest.senha()));
             }
 
             professorRepository.save(professor);
@@ -140,8 +150,6 @@ public class ProfessorService {
             }else{
                 throw new RuntimeException("Não pode eliminar este professor");
             }
-
-
         }
     }
 

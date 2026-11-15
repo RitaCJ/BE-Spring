@@ -2,6 +2,7 @@ package com.example.bespring.modulosTest.utilizadoresTest.servicesTests;
 
 import com.example.bespring.modulosTest.utilizadoresTest.domain.Escola;
 import com.example.bespring.modulosTest.utilizadoresTest.domain.Professor;
+import com.example.bespring.modulosTest.utilizadoresTest.domain.enums.EstadoConta;
 import com.example.bespring.modulosTest.utilizadoresTest.domain.enums.Genero;
 import com.example.bespring.modulosTest.utilizadoresTest.domain.enums.Perfil;
 import com.example.bespring.modulosTest.utilizadoresTest.domain.enums.TipoProfissional;
@@ -22,6 +23,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -56,6 +58,7 @@ public class ProfessorServiceTest {
 
             //Arrange
             Professor professor = new Professor();
+            professor.setNumeroIdentificacao("923243A33");
             professor.setPrimeiroNome("Akin");
             professor.setSobrenome("Asa");
             professor.setEmail("asa@gmail.com");
@@ -63,9 +66,10 @@ public class ProfessorServiceTest {
             professor.setSenha("@MarEMar2000");
             professor.setTipo(TipoProfissional.PROFESSOR);
             professor.setGenero(Genero.MASCULINO);
+            professor.setDataNascimento(LocalDate.of(1999, 1, 2));
 
 
-            Escola escola = new Escola("School", "Rua francisco da silva", "9234234445", "school@gmail.com");
+            Escola escola = new Escola("School", "Rua francisco da silva", "923423445", "school@gmail.com");
             escola.setIdEscola(1L);
             professor.setEscola(escola);
 
@@ -82,10 +86,12 @@ public class ProfessorServiceTest {
 
             //Act
             CriarProfessorRequest request = new CriarProfessorRequest(
+                    professor.getNumeroIdentificacao(),
                     professor.getPrimeiroNome(),
                     professor.getSobrenome(),
                     professor.getTelefone(),
                     professor.getGenero(),
+                    professor.getDataNascimento(),
                     professor.getEmail(),
                     professor.getSenha(),
                     professor.getTipo(),
@@ -98,6 +104,7 @@ public class ProfessorServiceTest {
             assertNotNull(result);
             assertEquals(1L, result.getIdUtilizador());
             //assertEquals(professor.getIdUtilizador(), result.getIdUtilizador());
+            assertEquals(professor.getNumeroIdentificacao(), result.getNumeroIdentificacao());
             assertEquals(professor.getPrimeiroNome(), result.getPrimeiroNome());
             assertEquals(professor.getSobrenome(), result.getSobrenome());
             assertEquals(professor.getEmail(), result.getEmail());
@@ -105,6 +112,7 @@ public class ProfessorServiceTest {
             assertTrue(passwordEncoder.matches(professor.getSenha(), result.getSenha()));
             assertEquals(professor.getTipo(), result.getTipo());
             assertEquals(professor.getGenero(), result.getGenero());
+            assertEquals(professor.getDataNascimento(), result.getDataNascimento());
             assertEquals(1L, result.getEscola().getIdEscola());
 
             //Verificar se procurou pela escola.
@@ -154,21 +162,27 @@ public class ProfessorServiceTest {
 
             Professor professor1 = new Professor();
             professor1.setIdUtilizador(1L);
+            professor1.setNumeroIdentificacao("923243A33");
             professor1.setPrimeiroNome("Akin");
             professor1.setSobrenome("Asa");
             professor1.setEmail("asa@gmail.com");
-            professor1.setTelefone("123456789");
+            professor1.setTelefone("923567899");
             professor1.setSenha("@MarEMar2000");
             professor1.setTipo(TipoProfissional.PROFESSOR);
             professor1.setGenero(Genero.MASCULINO);
+            professor1.setDataNascimento(LocalDate.of(1999, 1, 2));
             professor1.setPerfil(Perfil.PROFESSOR);
+            professor1.setEstadoConta(EstadoConta.PENDENTE);
+            professor1.setCriadoPor(null);
+            professor1.setAprovadoPor(null);
 
-            Escola escola = new Escola("School", "Rua francisco da silva", "9234234445", "school@gmail.com");
+            Escola escola = new Escola("School", "Rua francisco da silva", "923423445", "school@gmail.com");
             escola.setIdEscola(1L);
             professor1.setEscola(escola);
 
             Professor professor2 = new Professor();
             professor2.setIdUtilizador(1L);
+            professor2.setNumeroIdentificacao("923243A33");
             professor2.setPrimeiroNome("Lua");
             professor2.setSobrenome("Luna");
             professor2.setEmail("lua@gmail.com");
@@ -176,7 +190,11 @@ public class ProfessorServiceTest {
             professor2.setSenha("LunarELua4000#");
             professor2.setTipo(TipoProfissional.PROFESSOR);
             professor2.setGenero(Genero.FEMININO);
+            professor2.setDataNascimento(LocalDate.of(1999, 1, 2));
             professor2.setPerfil(Perfil.PROFESSOR);
+            professor2.setEstadoConta(EstadoConta.PENDENTE);
+            professor2.setCriadoPor(null);
+            professor2.setAprovadoPor(null);
 
             escola.setIdEscola(1L);
             professor2.setEscola(escola);
@@ -192,8 +210,62 @@ public class ProfessorServiceTest {
             assertTrue(result.contains(professor1));
             assertTrue(result.contains(professor2));
         }
-    }
 
+//        @Test
+//        @DisplayName("Deve listar todos os professores pedentes de aprovacao")
+////        void deveListarProfessoresPendentes(){
+////
+////            Professor professor1 = new Professor();
+////            professor1.setIdUtilizador(1L);
+////            professor1.setNumeroIdentificacao("923243A33");
+////            professor1.setPrimeiroNome("Akin");
+////            professor1.setSobrenome("Asa");
+////            professor1.setEmail("asa@gmail.com");
+////            professor1.setTelefone("123456789");
+////            professor1.setSenha("@MarEMar2000");
+////            professor1.setTipo(TipoProfissional.PROFESSOR);
+////            professor1.setGenero(Genero.MASCULINO);
+////            professor1.setDataNascimento(LocalDate.of(1999, 1, 2));
+////            professor1.setPerfil(Perfil.PROFESSOR);
+////            professor1.setEstadoConta(EstadoConta.PENDENTE);
+////            professor1.setCriadoPor(null);
+////
+////
+////            Escola escola = new Escola("School", "Rua francisco da silva", "9234234445", "school@gmail.com");
+////            escola.setIdEscola(1L);
+////            professor1.setEscola(escola);
+////
+////            Professor professor2 = new Professor();
+////            professor2.setIdUtilizador(1L);
+////            professor2.setNumeroIdentificacao("923243A33");
+////            professor2.setPrimeiroNome("Lua");
+////            professor2.setSobrenome("Luna");
+////            professor2.setEmail("lua@gmail.com");
+////            professor2.setTelefone("923234323");
+////            professor2.setSenha("LunarELua4000#");
+////            professor2.setTipo(TipoProfissional.PROFESSOR);
+////            professor2.setGenero(Genero.FEMININO);
+////            professor2.setDataNascimento(LocalDate.of(1999, 1, 2));
+////            professor2.setPerfil(Perfil.PROFESSOR);
+////            professor2.setEstadoConta(EstadoConta.PENDENTE);
+////            professor2.setCriadoPor(null);
+////
+////            escola.setIdEscola(1L);
+////            professor2.setEscola(escola);
+////
+////            when(professorRepository.findAll()).thenReturn(
+////                    List.of(professor1, professor2)
+////            );
+////
+////            var result = professorService.listarProfessores();
+////
+////            assertNotNull(result);
+////            assertEquals(2, result.size());
+////            assertTrue(result.contains(professor1));
+////            assertTrue(result.contains(professor2));
+////        }
+
+    }
 
 
     @Nested
@@ -260,6 +332,4 @@ public class ProfessorServiceTest {
         }
 
     }
-
-
 }

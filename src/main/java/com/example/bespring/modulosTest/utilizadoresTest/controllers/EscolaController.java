@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import java.nio.file.AccessDeniedException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +24,7 @@ public class EscolaController {
     private final EscolaService escolaService;
 
     public EscolaController(EscolaService escolaService) {
+
         this.escolaService = escolaService;
     }
 
@@ -113,11 +115,17 @@ public class EscolaController {
     }
 
     @DeleteMapping("/{idEscola}")
-    public ResponseEntity<Void> apagarAluno(@PathVariable Long idEscola,
-                                            Authentication authentication){
+    public ResponseEntity<Void> apagarEscola(@PathVariable Long idEscola,
+                                            Authentication authentication) throws AccessDeniedException {
         Utilizador admin = (Utilizador) authentication.getPrincipal();
-        assert admin != null;
-        long idAdminLogado = admin.getIdUtilizador();
+
+        long idAdminLogado;
+
+        if(admin != null) {
+            idAdminLogado = admin.getIdUtilizador();
+        }else{
+            throw new AccessDeniedException("Utilizador nao autenticado");
+        }
 
         escolaService.apagarEscola(idEscola, idAdminLogado);
 

@@ -25,10 +25,11 @@ public class UtilizadorDomainTest {
         String login = "ana@gmail.com";
         String senha = "Feliznatal2026%";
         EstadoConta estadoConta = EstadoConta.PENDENTE;
+        Utilizador criadoPor = null;
 
         Escola escola = new Escola("School", "Rua francisco da silva", "923423444", "school@gmail.com");
 
-        Utilizador utilizador = new Utilizador(primeiroNome, sobrenome, genero, dataNascimento, perfil, login, senha, estadoConta, escola);
+        Utilizador utilizador = new Utilizador(primeiroNome, sobrenome, genero, dataNascimento, perfil, login, senha, estadoConta, escola, criadoPor);
 
         assertEquals(primeiroNome, utilizador.getPrimeiroNome());
         assertEquals(sobrenome, utilizador.getSobrenome());
@@ -39,6 +40,7 @@ public class UtilizadorDomainTest {
         assertEquals(senha, utilizador.getSenha());
         assertEquals(estadoConta, utilizador.getEstadoConta());
         assertEquals(escola, utilizador.getEscola());
+        assertEquals(criadoPor, utilizador.getCriadoPor());
 
     }
 
@@ -53,11 +55,12 @@ public class UtilizadorDomainTest {
         String login = "ana@gmail.com";
         String senha = "Feliznatal2026%";
         EstadoConta estadoConta = EstadoConta.PENDENTE;
+        Utilizador criadoPor = null;
 
         Escola escola = new Escola("School", "Rua francisco da silva", "923423444", "school@gmail.com");
 
         assertThrows(IllegalArgumentException.class, () -> {
-           new Utilizador(primeiroNome, sobrenome, genero, dataNascimento, perfil, login, senha, estadoConta, escola);
+           new Utilizador(primeiroNome, sobrenome, genero, dataNascimento, perfil, login, senha, estadoConta, escola, criadoPor);
         });
 
     }
@@ -73,11 +76,12 @@ public class UtilizadorDomainTest {
         String login = "ana@gmail.com";
         String senha = "Feliznatal2026%";
         EstadoConta estadoConta = EstadoConta.PENDENTE;
+        Utilizador criadoPor = null;
 
         Escola escola = new Escola("School", "Rua francisco da silva", "923423444", "school@gmail.com");
 
         assertThrows(IllegalArgumentException.class, () -> {
-           new Utilizador(primeiroNome, sobrenome, genero, dataNascimento, perfil, login, senha, estadoConta, escola);
+           new Utilizador(primeiroNome, sobrenome, genero, dataNascimento, perfil, login, senha, estadoConta, escola, criadoPor);
         });
 
     }
@@ -93,11 +97,12 @@ public class UtilizadorDomainTest {
         String login = "";
         String senha = "Feliznatal2026%";
         EstadoConta estadoConta = EstadoConta.PENDENTE;
+        Utilizador criadoPor = null;
 
         Escola escola = new Escola("School", "Rua francisco da silva", "923423444", "school@gmail.com");
 
         assertThrows(IllegalArgumentException.class, () -> {
-            new Utilizador(primeiroNome, sobrenome, genero, dataNascimento, perfil, login, senha, estadoConta, escola);
+            new Utilizador(primeiroNome, sobrenome, genero, dataNascimento, perfil, login, senha, estadoConta, escola, criadoPor);
         });
 
     }
@@ -113,11 +118,12 @@ public class UtilizadorDomainTest {
         String login = "Lua0121";
         String senha = "";
         EstadoConta estadoConta = EstadoConta.PENDENTE;
+        Utilizador criadoPor = null;
 
         Escola escola = new Escola("School", "Rua francisco da silva", "923423444", "school@gmail.com");
 
         assertThrows(IllegalArgumentException.class, () -> {
-            new Utilizador(primeiroNome, sobrenome, genero, dataNascimento, perfil, login, senha, estadoConta, escola);
+            new Utilizador(primeiroNome, sobrenome, genero, dataNascimento, perfil, login, senha, estadoConta, escola, criadoPor);
         });
     }
 
@@ -132,11 +138,12 @@ public class UtilizadorDomainTest {
         String login = "Lua0121";
         String senha = "Feliznatal2026%";
         EstadoConta estadoConta = EstadoConta.PENDENTE;
+        Utilizador criadoPor = null;
 
         Escola escola = new Escola("School", "Rua francisco da silva", "923423444", "school@gmail.com");
 
         assertThrows(IllegalArgumentException.class, () -> {
-            new Utilizador(primeiroNome, sobrenome, genero, dataNascimento, perfil, login, senha, estadoConta, escola);
+            new Utilizador(primeiroNome, sobrenome, genero, dataNascimento, perfil, login, senha, estadoConta, escola, criadoPor);
         });
     }
 
@@ -150,11 +157,12 @@ public class UtilizadorDomainTest {
         String login = "Lua0121";
         String senha = "Feliznatal2026%";
         EstadoConta estadoConta = EstadoConta.PENDENTE;
+        Utilizador criadoPor = null;
 
         Escola escola = new Escola("School", "Rua francisco da silva", "923423444", "school@gmail.com");
 
         assertThrows(IllegalArgumentException.class, () -> {
-            new Utilizador(primeiroNome, sobrenome, genero, dataNascimento, perfil, login, senha, estadoConta, escola);
+            new Utilizador(primeiroNome, sobrenome, genero, dataNascimento, perfil, login, senha, estadoConta, escola, criadoPor);
         });
     }
 }

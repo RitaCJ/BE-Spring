@@ -3,6 +3,7 @@ package com.example.bespring.modulosTest.utilizadoresTest.controllersTests;
 import com.example.bespring.modulosTest.utilizadoresTest.controllers.ProfessorController;
 import com.example.bespring.modulosTest.utilizadoresTest.domain.Escola;
 import com.example.bespring.modulosTest.utilizadoresTest.domain.Professor;
+import com.example.bespring.modulosTest.utilizadoresTest.domain.enums.EstadoConta;
 import com.example.bespring.modulosTest.utilizadoresTest.domain.enums.Genero;
 import com.example.bespring.modulosTest.utilizadoresTest.domain.enums.Perfil;
 import com.example.bespring.modulosTest.utilizadoresTest.domain.enums.TipoProfissional;
@@ -22,8 +23,10 @@ import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import tools.jackson.databind.ObjectMapper;
 
+import java.time.LocalDate;
 import java.util.List;
 
+import static org.hamcrest.Matchers.nullValue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -69,25 +72,33 @@ public class ProfessorControllerTest {
         //Arrange - Preparar
         Professor professor = new Professor();
         professor.setIdUtilizador(1L);
+        professor.setNumeroIdentificacao("923243A33");
         professor.setPrimeiroNome("Akin");
         professor.setSobrenome("Asa");
         professor.setEmail("asa@gmail.com");
-        professor.setTelefone("123456789");
+        professor.setTelefone("923456789");
         professor.setSenha("@MarEMar2000");
         professor.setTipo(TipoProfissional.PROFESSOR);
         professor.setGenero(Genero.MASCULINO);
+        professor.setDataNascimento(LocalDate.of(1999, 1, 2));
         professor.setPerfil(Perfil.PROFESSOR);
+        professor.setEstadoConta(EstadoConta.PENDENTE);
+        professor.setCriadoPor(null);
+        professor.setAprovadoPor(null);
 
-        Escola escola = new Escola("School", "Rua francisco da silva", "9234234445", "school@gmail.com");
+
+        Escola escola = new Escola("School", "Rua francisco da silva", "923423445", "school@gmail.com");
         escola.setIdEscola(1L);
         professor.setEscola(escola);
 
         //Dados enviados pelo cliente para o endpoint.
         CriarProfessorRequest request = new CriarProfessorRequest(
+                professor.getNumeroIdentificacao(),
                 professor.getPrimeiroNome(),
                 professor.getSobrenome(),
                 professor.getTelefone(),
                 professor.getGenero(),
+                professor.getDataNascimento(),
                 professor.getEmail(),
                 professor.getSenha(),
                 professor.getTipo(),
@@ -111,14 +122,19 @@ public class ProfessorControllerTest {
                 .andDo(print())
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.idUtilizador").value(1L))
+                .andExpect(jsonPath("$.numeroIdentificacao").value("923243A33"))
                 .andExpect(jsonPath("$.primeiroNome").value("Akin"))
                 .andExpect(jsonPath("$.sobrenome").value("Asa"))
-                .andExpect(jsonPath("$.telefone").value("123456789"))
+                .andExpect(jsonPath("$.telefone").value("923456789"))
                 .andExpect(jsonPath("$.genero").value(Genero.MASCULINO.toString()))
+                .andExpect(jsonPath("$.dataNascimento").value("1999-01-02"))
                 .andExpect(jsonPath("$.email").value("asa@gmail.com"))
                 //.andExpect(jsonPath("$.senha").value("@MarEMar2000"))
                 .andExpect(jsonPath("$.tipo").value(TipoProfissional.PROFESSOR.toString()))
                 .andExpect(jsonPath("$.perfil").value(Perfil.PROFESSOR.toString()))
+                .andExpect(jsonPath("$.estadoConta").value(EstadoConta.PENDENTE.toString()))
+                .andExpect(jsonPath("$.criadoPor").value(nullValue(null)))
+                .andExpect(jsonPath("$.aprovadoPor").value(nullValue(null)))
                 .andExpect(jsonPath("$.idEscola").value(escola.getIdEscola()));
 
                 verify(professorService).cadastrarProfessor(any(CriarProfessorRequest.class));
@@ -127,7 +143,7 @@ public class ProfessorControllerTest {
     @Test
     void deveProcurarProfessorPorId() throws Exception {
 
-        Escola escola = new Escola("School", "Rua francisco da silva", "9234234445", "school@gmail.com");
+        Escola escola = new Escola("School", "Rua francisco da silva", "923423445", "school@gmail.com");
         escola.setIdEscola(1L);
 
         Professor professor = new Professor();
@@ -151,9 +167,9 @@ public class ProfessorControllerTest {
 
     @Test
     void deveListarProfessores() throws Exception {
-
         Professor professor1 = new Professor();
         professor1.setIdUtilizador(1L);
+        professor1.setNumeroIdentificacao("923243A33");
         professor1.setPrimeiroNome("Akin");
         professor1.setSobrenome("Asa");
         professor1.setEmail("asa@gmail.com");
@@ -161,14 +177,19 @@ public class ProfessorControllerTest {
         professor1.setSenha("@MarEMar2000");
         professor1.setTipo(TipoProfissional.PROFESSOR);
         professor1.setGenero(Genero.MASCULINO);
+        professor1.setDataNascimento(LocalDate.of(1998, 10, 12));
         professor1.setPerfil(Perfil.PROFESSOR);
+        professor1.setEstadoConta(EstadoConta.PENDENTE);
+        professor1.setCriadoPor(null);
+        professor1.setAprovadoPor(null);
 
-        Escola escola = new Escola("School", "Rua francisco da silva", "9234234445", "school@gmail.com");
+        Escola escola = new Escola("School", "Rua francisco da silva", "923423445", "school@gmail.com");
         escola.setIdEscola(1L);
         professor1.setEscola(escola);
 
         Professor professor2 = new Professor();
         professor2.setIdUtilizador(2L);
+        professor2.setNumeroIdentificacao("923243A33");
         professor2.setPrimeiroNome("Lua");
         professor2.setSobrenome("Luna");
         professor2.setEmail("lua@gmail.com");
@@ -176,8 +197,13 @@ public class ProfessorControllerTest {
         professor2.setSenha("LunarELua4000#");
         professor2.setTipo(TipoProfissional.PROFESSOR);
         professor2.setGenero(Genero.FEMININO);
+        professor2.setDataNascimento(LocalDate.of(1999, 1, 2));
         professor2.setPerfil(Perfil.PROFESSOR);
+        professor2.setEstadoConta(EstadoConta.PENDENTE);
+        professor2.setCriadoPor(null);
+        professor2.setAprovadoPor(null);
 
+        escola.setIdEscola(1L);
         professor2.setEscola(escola);
 
         when(professorService.listarProfessores()).thenReturn(
@@ -188,22 +214,32 @@ public class ProfessorControllerTest {
                 .andExpect(jsonPath("$").isArray())
                 .andExpect(jsonPath("$.length()").value(2))
                 .andExpect(jsonPath("$[0].idUtilizador").value(1L))
+                .andExpect(jsonPath("$[0].numeroIdentificacao").value("923243A33"))
                 .andExpect(jsonPath("$[0].primeiroNome").value("Akin"))
                 .andExpect(jsonPath("$[0].sobrenome").value("Asa"))
                 .andExpect(jsonPath("$[0].email").value("asa@gmail.com"))
                 .andExpect(jsonPath("$[0].telefone").value("123456789"))
                 .andExpect(jsonPath("$[0].tipo").value(TipoProfissional.PROFESSOR.toString()))
                 .andExpect(jsonPath("$[0].genero").value(Genero.MASCULINO.toString()))
+                .andExpect(jsonPath("$[0].dataNascimento").value("1998-10-12"))
                 .andExpect(jsonPath("$[0].perfil").value(Perfil.PROFESSOR.toString()))
+                .andExpect(jsonPath("$[0].estadoConta").value(EstadoConta.PENDENTE.toString()))
+                .andExpect(jsonPath("$[0].criadoPor").value(nullValue(null)))
+                .andExpect(jsonPath("$[0].aprovadoPor").value(nullValue(null)))
                 .andExpect(jsonPath("$[0].idEscola").value(escola.getIdEscola()))
                 .andExpect(jsonPath("$[1].idUtilizador").value(2L))
+                .andExpect(jsonPath("$[1].numeroIdentificacao").value("923243A33"))
                 .andExpect(jsonPath("$[1].primeiroNome").value("Lua"))
                 .andExpect(jsonPath("$[1].sobrenome").value("Luna"))
                 .andExpect(jsonPath("$[1].email").value("lua@gmail.com"))
                 .andExpect(jsonPath("$[1].telefone").value("923234323"))
                 .andExpect(jsonPath("$[1].tipo").value(TipoProfissional.PROFESSOR.toString()))
                 .andExpect(jsonPath("$[1].genero").value(Genero.FEMININO.toString()))
+                .andExpect(jsonPath("$[1].dataNascimento").value("1999-01-02"))
                 .andExpect(jsonPath("$[1].perfil").value(Perfil.PROFESSOR.toString()))
+                .andExpect(jsonPath("$[1].estadoConta").value(EstadoConta.PENDENTE.toString()))
+                .andExpect(jsonPath("$[1].criadoPor").value(nullValue(null)))
+                .andExpect(jsonPath("$[1].aprovadoPor").value(nullValue(null)))
                 .andExpect(jsonPath("$[1].idEscola").value(escola.getIdEscola()));
 
                 verify(professorService).listarProfessores();
@@ -213,7 +249,6 @@ public class ProfessorControllerTest {
     @Test
     @WithMockUser(username = "zaburi12@gmail.com", roles = {"PROFESSOR"})
     void deveAtualizarProfessor() throws Exception{
-
         Professor professor = new Professor();
         professor.setIdUtilizador(1L);
         professor.setPrimeiroNome("Zaburi");
@@ -253,7 +288,7 @@ public class ProfessorControllerTest {
     @Test
     void deveApagarProfessorPorId() throws Exception {
 
-        Escola escola = new Escola("School", "Rua francisco da silva", "9234234445", "school@gmail.com");
+        Escola escola = new Escola("School", "Rua francisco da silva", "923423445", "school@gmail.com");
         escola.setIdEscola(1L);
 
         Professor professor = new Professor();

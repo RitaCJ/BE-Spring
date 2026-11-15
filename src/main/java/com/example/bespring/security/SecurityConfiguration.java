@@ -40,12 +40,16 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.POST, "/api/alunos").hasRole("PROFESSOR")
                         .requestMatchers(HttpMethod.POST, "/api/turmas").hasRole("PROFESSOR")
                         .requestMatchers(HttpMethod.POST, "/api/escolas").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/adminEscola").hasRole("ADMIN")
+
+                        .requestMatchers(HttpMethod.POST, "/api/utilizadorProfissional/{idUtilizador}/aprovar").hasRole("ADMIN_ESCOLA")
 
                         //Atualizar
                         .requestMatchers(HttpMethod.PUT, "/api/professores/{idUtilizador}").hasRole("PROFESSOR")
                         .requestMatchers(HttpMethod.PUT, "/api/psicologos/{idUtilizador}").hasRole("PSICOLOGO")
                         .requestMatchers(HttpMethod.PUT, "/api/alunos/{idUtilizador}").hasRole("PROFESSOR")
                         .requestMatchers(HttpMethod.PUT, "/api/escolas/{idEscola}").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/api/adminEscola/{idUtilizador}").hasRole("ADMIN")
 
 
                         //Buscar
@@ -53,6 +57,7 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.GET, "/api/psicologos/{idUtilizador}").hasRole("PSICOLOGO")
                         .requestMatchers(HttpMethod.GET, "/api/alunos/{idUtilizador}").hasRole("PROFESSOR")
                         .requestMatchers(HttpMethod.GET, "/api/escolas/{idUtilizador}").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/api/adminEscola/{idUtilizador}").hasRole("ADMIN")
 
                         //Listar
                         .requestMatchers(HttpMethod.GET, "/api/alunos").hasRole("PROFESSOR")
@@ -63,6 +68,7 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.DELETE, "/api/psicologos/{idUtilizador}").hasRole("PSICOLOGO")
                         .requestMatchers(HttpMethod.DELETE, "/api/alunos/{idUtilizador}").hasRole("PROFESSOR")
                         .requestMatchers(HttpMethod.DELETE, "/api/escolas/{idEscola}").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/adminEscola/{idUtilizador}").hasRole("ADMIN")
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();

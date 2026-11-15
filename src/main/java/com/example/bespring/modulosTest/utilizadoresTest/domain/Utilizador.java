@@ -46,7 +46,6 @@ public class Utilizador implements UserDetails {
     @Column(nullable = false)
     private Genero genero;
 
-    @NotEmpty
     @Column(nullable = false)
     private LocalDate dataNascimento;
 
@@ -77,11 +76,17 @@ public class Utilizador implements UserDetails {
     @OneToMany(mappedBy = "administrador")
     private List<Escola> escolaRegistadas = new ArrayList<>();
 
+    @ManyToOne(optional = true, fetch = FetchType.LAZY)
+    @JoinColumn(name = "criado_por", nullable = true)
+    private Utilizador criadoPor;
+
+
     public Utilizador() {
 
     }
 
-    public Utilizador(String primeiroNome, String sobrenome, Genero genero, LocalDate dataNascimento, Perfil perfil, String login, String senha, EstadoConta estadoConta, Escola escola) {
+    public Utilizador(String primeiroNome, String sobrenome, Genero genero, LocalDate dataNascimento, Perfil perfil,
+                      String login, String senha, EstadoConta estadoConta, Escola escola, Utilizador criadoPor) {
 
         if(primeiroNome == null || primeiroNome.isBlank()){
             throw new IllegalArgumentException("O primeiro nome não pode ser vázio");
@@ -106,8 +111,8 @@ public class Utilizador implements UserDetails {
         this.senha = senha;
         this.estadoConta = estadoConta;
         this.escola = escola;
+        this.criadoPor = criadoPor;
     }
-
 
     /**
      * getAuthorities verifica quais as roles (perfil) do utilizador.

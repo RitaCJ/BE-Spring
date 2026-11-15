@@ -60,7 +60,7 @@ public class EscolaServiceTest {
             Long idAdmin = 1L;
 
             Utilizador admin = new Utilizador("Raquel", "KingStone", Genero.FEMININO,
-                    LocalDate.of(2004,1,5), Perfil.ADMIN,"raquel@gmail.com", "maura1234", EstadoConta.ATIVA, null);
+                    LocalDate.of(2004,1,5), Perfil.ADMIN,"raquel@gmail.com", "maura1234", EstadoConta.ATIVA, null, null);
             admin.setIdUtilizador(1L);
             escola.setAdministrador(admin);
 
@@ -117,7 +117,7 @@ public class EscolaServiceTest {
             Long idAdminLogado = 1L;
 
             Utilizador admin = new Utilizador("Raquel", "KingStone", Genero.FEMININO,
-                    LocalDate.of(2004,1,5), Perfil.ADMIN,"raquel@gmail.com", "maura1234", EstadoConta.ATIVA, null);
+                    LocalDate.of(2004,1,5), Perfil.ADMIN,"raquel@gmail.com", "maura1234", EstadoConta.ATIVA, null, null);
             admin.setIdUtilizador(1L);
             escola1.setAdministrador(admin);
             escola2.setAdministrador(admin);
@@ -150,7 +150,7 @@ public class EscolaServiceTest {
             long idEscola = 1L;
 
             Utilizador admin = new Utilizador("Raquel", "KingStone", Genero.FEMININO,
-                    LocalDate.of(2004,1,5), Perfil.ADMIN,"raquel@gmail.com", "maura1234", EstadoConta.ATIVA, null);
+                    LocalDate.of(2004,1,5), Perfil.ADMIN,"raquel@gmail.com", "maura1234", EstadoConta.ATIVA, null, null);
             admin.setIdUtilizador(2L);
             escola.setAdministrador(admin);
 
@@ -181,7 +181,7 @@ public class EscolaServiceTest {
             long idEscola = 1L;
 
             Utilizador admin = new Utilizador("Raquel", "KingStone", Genero.FEMININO,
-                    LocalDate.of(2004,1,5), Perfil.ADMIN,"raquel@gmail.com", "maura1234", EstadoConta.ATIVA, null);
+                    LocalDate.of(2004,1,5), Perfil.ADMIN,"raquel@gmail.com", "maura1234", EstadoConta.ATIVA, null, null);
             admin.setIdUtilizador(2L);
             escola.setAdministrador(admin);
 
@@ -214,7 +214,7 @@ public class EscolaServiceTest {
             long idEscola = 1L;
 
             Utilizador admin = new Utilizador("Raquel", "KingStone", Genero.FEMININO,
-                    LocalDate.of(2004,1,5), Perfil.ADMIN,"raquel@gmail.com", "maura1234", EstadoConta.ATIVA, null);
+                    LocalDate.of(2004,1,5), Perfil.ADMIN,"raquel@gmail.com", "maura1234", EstadoConta.ATIVA, null, null);
             admin.setIdUtilizador(2L);
             escola.setAdministrador(admin);
 
