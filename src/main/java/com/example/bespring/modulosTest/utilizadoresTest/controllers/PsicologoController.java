@@ -28,14 +28,19 @@ public class PsicologoController {
 
         CriarPsicologoResponse psicologoResponse = new CriarPsicologoResponse(
                 psicologo.getIdUtilizador(),
+                psicologo.getNumeroIdentificacao(),
                 psicologo.getPrimeiroNome(),
                 psicologo.getSobrenome(),
                 psicologo.getTelefone(),
                 psicologo.getGenero(),
+                psicologo.getDataNascimento(),
                 psicologo.getEmail(),
                 psicologo.getTipo(),
                 psicologo.getPerfil(),
-                psicologo.getEscola().getIdEscola()
+                psicologo.getEscola().getIdEscola(),
+                psicologo.getEstadoConta(),
+                psicologo.getCriadoPor(),
+                psicologo.getAprovadoPor()
         );
 
         return ResponseEntity.status(HttpStatus.CREATED).body(psicologoResponse);
@@ -54,14 +59,19 @@ public class PsicologoController {
 
         CriarPsicologoResponse psicologoResponse = new CriarPsicologoResponse(
                 psicologo.getIdUtilizador(),
+                psicologo.getNumeroIdentificacao(),
                 psicologo.getPrimeiroNome(),
                 psicologo.getSobrenome(),
                 psicologo.getTelefone(),
                 psicologo.getGenero(),
+                psicologo.getDataNascimento(),
                 psicologo.getEmail(),
                 psicologo.getTipo(),
                 psicologo.getPerfil(),
-                psicologo.getEscola().getIdEscola()
+                psicologo.getEscola().getIdEscola(),
+                psicologo.getEstadoConta(),
+                psicologo.getCriadoPor(),
+                psicologo.getAprovadoPor()
         );
 
         return ResponseEntity.status(HttpStatus.OK).body(psicologoResponse);

@@ -35,8 +35,12 @@ public class ProfessorDomainTest {
 
         Escola escola = new Escola("School", "Rua francisco da silva", "923423445", "school@gmail.com");
 
-        UtilizadorProfissional userProf = new UtilizadorProfissional(numeroIdentificacao, primeiroNome, sobrenome, telefone, genero, dataNascimento, email,
+//        UtilizadorProfissional userProf = new UtilizadorProfissional(numeroIdentificacao, primeiroNome, sobrenome, telefone, genero, dataNascimento, email,
+//                senha, tipo, perfil, escola, estadoConta, criadoPor, aprovadoPor);
+
+        Professor userProf = new Professor(numeroIdentificacao, primeiroNome, sobrenome, telefone, genero, dataNascimento, email,
                 senha, tipo, perfil, escola, estadoConta, criadoPor, aprovadoPor);
+
 
         assertEquals(numeroIdentificacao, userProf.getNumeroIdentificacao());
         assertEquals(primeiroNome, userProf.getPrimeiroNome());

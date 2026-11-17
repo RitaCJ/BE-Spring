@@ -21,6 +21,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -54,19 +55,19 @@ public class PsicologoServiceTest {
 
             //Arrange
             Psicologo psicologo = new Psicologo();
+            psicologo.setNumeroIdentificacao("923243A33");
             psicologo.setPrimeiroNome("Bahati");
             psicologo.setSobrenome("Luck");
             psicologo.setEmail("luck@gmail.com");
-            psicologo.setTelefone("153657789");
+            psicologo.setTelefone("953657783");
             psicologo.setSenha("@Tailong20004");
             psicologo.setTipo(TipoProfissional.PSICOLOGO);
             psicologo.setGenero(Genero.FEMININO);
             psicologo.setPerfil(Perfil.PSICOLOGO);
+            psicologo.setDataNascimento(LocalDate.of(1999, 1, 2));
 
-            Escola escola = new Escola("School", "Rua francisco da silva", "9234234445", "school@gmail.com");
-
+            Escola escola = new Escola("School", "Rua francisco da silva", "923423445", "school@gmail.com");
             escola.setIdEscola(1L);
-
             psicologo.setEscola(escola);
 
             when(escolaRepository.findById(1L)).thenReturn(Optional.of(escola));
@@ -79,10 +80,12 @@ public class PsicologoServiceTest {
                     });
             //Act
             CriarPsicologoRequest request = new CriarPsicologoRequest(
+                    psicologo.getNumeroIdentificacao(),
                     psicologo.getPrimeiroNome(),
                     psicologo.getSobrenome(),
                     psicologo.getTelefone(),
                     psicologo.getGenero(),
+                    psicologo.getDataNascimento(),
                     psicologo.getEmail(),
                     psicologo.getSenha(),
                     psicologo.getTipo(),
@@ -93,11 +96,14 @@ public class PsicologoServiceTest {
 
             assertNotNull(request);
             assertEquals(1L, result.getIdUtilizador());
+            assertEquals(psicologo.getNumeroIdentificacao(), result.getNumeroIdentificacao());
+            assertEquals(psicologo.getNumeroIdentificacao(), result.getIdUtilizador());
             assertEquals(psicologo.getPrimeiroNome(), result.getPrimeiroNome());
             assertEquals(psicologo.getSobrenome(), result.getSobrenome());
             assertEquals(psicologo.getEmail(), result.getEmail());
             assertTrue(passwordEncoder.matches(psicologo.getSenha(), result.getSenha()));
             assertEquals(psicologo.getGenero(), result.getGenero());
+            assertEquals(psicologo.getDataNascimento(), result.getDataNascimento());
             assertEquals(psicologo.getTipo(), result.getTipo());
             assertEquals(1L, result.getEscola().getIdEscola());
 
@@ -142,7 +148,7 @@ public class PsicologoServiceTest {
             psicologo.setPrimeiroNome("Bahati");
             psicologo.setSobrenome("Luck");
             psicologo.setEmail("luck@gmail.com");
-            psicologo.setTelefone("153657789");
+            psicologo.setTelefone("953657789");
             psicologo.setSenha("@Tailong20004");
             psicologo.setGenero(Genero.FEMININO);
 
@@ -192,6 +198,5 @@ public class PsicologoServiceTest {
             verify(psicologoRepository).deleteById(idUser);
 
         }
-
     }
 }

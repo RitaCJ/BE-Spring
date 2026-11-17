@@ -18,7 +18,7 @@ import java.time.LocalDate;
 public class UtilizadorProfissional extends Utilizador{
 
     @NotEmpty
-    @Column(length = 12, nullable = false)
+    @Column(length = 12, nullable = false, unique = true)
     private String telefone;
 
     @NotEmpty
@@ -30,7 +30,7 @@ public class UtilizadorProfissional extends Utilizador{
     private TipoProfissional tipo;
 
     @NotEmpty
-    @Column(length = 20, nullable = false)
+    @Column(length = 20, nullable = false, unique = true)
     private String numeroIdentificacao;
 
     @ManyToOne(optional = true, fetch = FetchType.LAZY)

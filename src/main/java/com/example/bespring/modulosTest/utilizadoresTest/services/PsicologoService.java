@@ -2,6 +2,7 @@ package com.example.bespring.modulosTest.utilizadoresTest.services;
 
 import com.example.bespring.modulosTest.utilizadoresTest.domain.Escola;
 import com.example.bespring.modulosTest.utilizadoresTest.domain.Psicologo;
+import com.example.bespring.modulosTest.utilizadoresTest.domain.enums.EstadoConta;
 import com.example.bespring.modulosTest.utilizadoresTest.domain.enums.Perfil;
 import com.example.bespring.modulosTest.utilizadoresTest.dto.AtualizarPsicologoRequest;
 import com.example.bespring.modulosTest.utilizadoresTest.dto.CriarPsicologoRequest;
@@ -9,6 +10,7 @@ import com.example.bespring.modulosTest.utilizadoresTest.repository.EscolaReposi
 import com.example.bespring.modulosTest.utilizadoresTest.repository.PsicologoRepository;
 import com.example.bespring.modulosTest.utilizadoresTest.repository.UtilizadorRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -39,17 +41,24 @@ public class PsicologoService {
 
         Perfil perfil = Perfil.PSICOLOGO;
 
+        EstadoConta estadoConta = EstadoConta.PENDENTE;
+
         //Converter de DTO para Entity
         Psicologo psicologoEntity = new Psicologo(
+                psicologoRequest.numeroIdentificacao(),
                 psicologoRequest.primeiroNome(),
                 psicologoRequest.sobrenome(),
                 psicologoRequest.telefone(),
                 psicologoRequest.genero(),
+                psicologoRequest.dataNascimento(),
                 psicologoRequest.email(),
                 passwordEncrypto,
                 psicologoRequest.tipo(),
                 perfil,
-                escola
+                escola,
+                estadoConta,
+                null,
+                null
         );
 
         return psicologoRepository.save(psicologoEntity);
@@ -78,6 +87,8 @@ public class PsicologoService {
     public void atualizarPsicologo(Long idUser, AtualizarPsicologoRequest psicologoRequest, String userLogado){
 
         var psicologoExiste = psicologoRepository.findById(idUser);
+
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
         if(psicologoExiste.isPresent()){
             //Psicologo encontrado.
@@ -108,7 +119,7 @@ public class PsicologoService {
             }
 
             if(psicologoRequest.senha() != null ){
-                psicologo.setSenha(psicologoRequest.senha());
+                psicologo.setSenha(passwordEncoder.encode(psicologoRequest.senha()));
             }
 
             psicologoRepository.save(psicologo);

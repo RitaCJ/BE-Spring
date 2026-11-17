@@ -3,6 +3,7 @@ package com.example.bespring.modulosTest.utilizadoresTest.controllersTests;
 import com.example.bespring.modulosTest.utilizadoresTest.controllers.PsicologoController;
 import com.example.bespring.modulosTest.utilizadoresTest.domain.Escola;
 import com.example.bespring.modulosTest.utilizadoresTest.domain.Psicologo;
+import com.example.bespring.modulosTest.utilizadoresTest.domain.enums.EstadoConta;
 import com.example.bespring.modulosTest.utilizadoresTest.domain.enums.Genero;
 import com.example.bespring.modulosTest.utilizadoresTest.domain.enums.Perfil;
 import com.example.bespring.modulosTest.utilizadoresTest.domain.enums.TipoProfissional;
@@ -21,6 +22,10 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import tools.jackson.databind.ObjectMapper;
+
+import java.time.LocalDate;
+
+import static org.hamcrest.Matchers.nullValue;
 import static org.mockito.Mockito.*;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -55,24 +60,31 @@ public class PsicologoControllerTest {
 
         Psicologo psicologo = new Psicologo();
         psicologo.setIdUtilizador(1L);
+        psicologo.setNumeroIdentificacao("923243A33");
         psicologo.setPrimeiroNome("Kwanzambi");
         psicologo.setSobrenome("Disila");
-        psicologo.setTelefone("123456789");
+        psicologo.setTelefone("923456787");
         psicologo.setEmail("kwanzambi@gmail.com");
         psicologo.setSenha("123456");
         psicologo.setGenero(Genero.MASCULINO);
+        psicologo.setDataNascimento(LocalDate.of(1999, 1, 2));
         psicologo.setTipo(TipoProfissional.PSICOLOGO);
         psicologo.setPerfil(Perfil.PSICOLOGO);
+        psicologo.setEstadoConta(EstadoConta.PENDENTE);
+        psicologo.setCriadoPor(null);
+        psicologo.setAprovadoPor(null);
 
-        Escola escola = new Escola("School", "Rua francisco da silva", "9234234445", "school@gmail.com");
+        Escola escola = new Escola("School", "Rua francisco da silva", "923423445", "school@gmail.com");
         escola.setIdEscola(1L);
         psicologo.setEscola(escola);
 
         CriarPsicologoRequest psicologoRequest = new CriarPsicologoRequest(
+                psicologo.getNumeroIdentificacao(),
                 psicologo.getPrimeiroNome(),
                 psicologo.getSobrenome(),
                 psicologo.getTelefone(),
                 psicologo.getGenero(),
+                psicologo.getDataNascimento(),
                 psicologo.getEmail(),
                 psicologo.getSenha(),
                 psicologo.getTipo(),
@@ -90,13 +102,18 @@ public class PsicologoControllerTest {
                 .andDo(print())
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.idUtilizador").value(1L))
+                .andExpect(jsonPath("$.numeroIdentificacao").value("923243A33"))
                 .andExpect(jsonPath("$.primeiroNome").value("Kwanzambi"))
                 .andExpect(jsonPath("$.sobrenome").value("Disila"))
-                .andExpect(jsonPath("$.telefone").value("123456789"))
+                .andExpect(jsonPath("$.telefone").value("923456787"))
                 .andExpect(jsonPath("$.genero").value(Genero.MASCULINO.toString()))
+                .andExpect(jsonPath("$.dataNascimento").value("1999-01-02"))
                 .andExpect(jsonPath("$.email").value("kwanzambi@gmail.com"))
                 .andExpect(jsonPath("$.tipo").value(TipoProfissional.PSICOLOGO.toString()))
                 .andExpect(jsonPath("$.perfil").value(Perfil.PSICOLOGO.toString()))
+                .andExpect(jsonPath("$.estadoConta").value(EstadoConta.PENDENTE.toString()))
+                .andExpect(jsonPath("$.criadoPor").value(nullValue(null)))
+                .andExpect(jsonPath("$.aprovadoPor").value(nullValue(null)))
                 .andExpect(jsonPath("$.idEscola").value(escola.getIdEscola()));
 
                 verify(psicologoService).cadastrarPsicologo(any(CriarPsicologoRequest.class));
@@ -106,7 +123,7 @@ public class PsicologoControllerTest {
     @WithMockUser(username = "kwanzambi@gmail.com")
     void deveProcurarUmPsicologoPeloId() throws Exception {
 
-        Escola escola = new Escola("School", "Rua francisco da silva", "9234234445", "school@gmail.com");
+        Escola escola = new Escola("School", "Rua francisco da silva", "923423445", "school@gmail.com");
         escola.setIdEscola(1L);
 
         Psicologo psicologo = new Psicologo();
@@ -142,7 +159,7 @@ public class PsicologoControllerTest {
         psicologo.setPrimeiroNome("Bahati");
         psicologo.setSobrenome("Luck");
         psicologo.setEmail("luck@gmail.com");
-        psicologo.setTelefone("153657789");
+        psicologo.setTelefone("923456787");
         psicologo.setSenha("@Tailong20004");
         psicologo.setGenero(Genero.FEMININO);
 
@@ -176,7 +193,7 @@ public class PsicologoControllerTest {
     @Test
     void deveApagarPsicologoPorId() throws Exception {
 
-        Escola escola = new Escola("School", "Rua francisco da silva", "9234234445", "school@gmail.com");
+        Escola escola = new Escola("School", "Rua francisco da silva", "923423445", "school@gmail.com");
         escola.setIdEscola(1L);
 
         Psicologo psicologo = new Psicologo();
